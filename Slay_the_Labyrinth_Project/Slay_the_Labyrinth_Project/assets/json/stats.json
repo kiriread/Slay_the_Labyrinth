@@ -1,0 +1,35 @@
+{
+  "warrior": {
+    "name": "Воин",
+    "base_stats": {
+      "max_health": 100,
+      "attack": 20,
+      "speed": 15,
+      "intellect": 10,
+      "max_mana": 50
+    },
+    "spells": ["rage", "sweeping_strike", "regeneration_potion"]
+  },
+  "rogue": {
+    "name": "Плут",
+    "base_stats": {
+      "max_health": 80,
+      "attack": 15,
+      "speed": 20,
+      "intellect": 15,
+      "max_mana": 75
+    },
+    "spells": ["backstab", "speed_potion", "dust_in_eyes"]
+  },
+  "mage": {
+    "name": "Маг",
+    "base_stats": {
+      "max_health": 70,
+      "attack": 10,
+      "speed": 13,
+      "intellect": 20,
+      "max_mana": 100
+    },
+    "spells": ["fireball", "frost_vortex", "healing"]
+  }
+}
