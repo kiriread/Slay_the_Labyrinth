@@ -123,7 +123,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Artifact.cpp" />
+    <ClCompile Include="BossRoom.cpp" />
+    <ClCompile Include="EliteRoom.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Loot.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapGenerator.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RestRoom.cpp" />
+    <ClCompile Include="ShopRoom.cpp" />
+    <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="WorldState.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Artifact.h" />
+    <ClInclude Include="BossRoom.h" />
+    <ClInclude Include="EliteRoom.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Loot.h" />
+    <ClInclude Include="MapGenerator.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="RestRoom.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="ShopRoom.h" />
+    <ClInclude Include="Stats.h" />
+    <ClInclude Include="WorldState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
