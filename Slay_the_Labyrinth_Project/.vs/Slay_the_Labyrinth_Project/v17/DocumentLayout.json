@@ -3,6 +3,30 @@
   "WorkspaceRootPath": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|solutionrelative:Slay_the_Labyrinth_Project\\Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleUnit.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|solutionrelative:Slay_the_Labyrinth_Project\\BattleUnit.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleUnit.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|solutionrelative:Slay_the_Labyrinth_Project\\BattleUnit.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|solutionrelative:Slay_the_Labyrinth_Project\\Enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|solutionrelative:Slay_the_Labyrinth_Project\\BattleManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|solutionrelative:Slay_the_Labyrinth_Project\\BattleManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Stats.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{4946F77B-9F56-4474-945E-BF6B1437C0E0}|Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project.vcxproj|solutionrelative:Slay_the_Labyrinth_Project\\Stats.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -114,7 +138,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -122,7 +146,85 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Enemy.cpp",
+              "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Enemy.cpp",
+              "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Enemy.cpp",
+              "ToolTip": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Enemy.cpp",
+              "RelativeToolTip": "Slay_the_Labyrinth_Project\\Enemy.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-03T13:16:02.413Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BattleUnit.cpp",
+              "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleUnit.cpp",
+              "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\BattleUnit.cpp",
+              "ToolTip": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleUnit.cpp",
+              "RelativeToolTip": "Slay_the_Labyrinth_Project\\BattleUnit.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-03T13:15:52.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "BattleUnit.h",
+              "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleUnit.h",
+              "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\BattleUnit.h",
+              "ToolTip": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleUnit.h",
+              "RelativeToolTip": "Slay_the_Labyrinth_Project\\BattleUnit.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-03T13:15:42.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Enemy.h",
+              "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Enemy.h",
+              "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Enemy.h",
+              "ToolTip": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Enemy.h",
+              "RelativeToolTip": "Slay_the_Labyrinth_Project\\Enemy.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-03T13:15:32.091Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BattleManager.h",
+              "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleManager.h",
+              "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\BattleManager.h",
+              "ToolTip": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleManager.h",
+              "RelativeToolTip": "Slay_the_Labyrinth_Project\\BattleManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-03T13:15:22.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BattleManager.cpp",
+              "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleManager.cpp",
+              "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\BattleManager.cpp",
+              "ToolTip": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BattleManager.cpp",
+              "RelativeToolTip": "Slay_the_Labyrinth_Project\\BattleManager.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-03T13:15:08.156Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Artifact.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Artifact.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Artifact.cpp",
@@ -130,12 +232,11 @@
               "RelativeToolTip": "Slay_the_Labyrinth_Project\\Artifact.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-05-03T12:26:52.166Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-03T12:26:52.166Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "Artifact.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Artifact.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Artifact.h",
@@ -143,12 +244,11 @@
               "RelativeToolTip": "Slay_the_Labyrinth_Project\\Artifact.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-05-03T12:26:42.553Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-03T12:26:42.553Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "Stats.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Stats.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Stats.cpp",
@@ -161,7 +261,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "Stats.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Stats.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Stats.h",
@@ -173,7 +273,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "Player.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Player.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Player.h",
@@ -185,7 +285,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "Player.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Player.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Player.cpp",
@@ -197,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
               "Title": "Loot.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Loot.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Loot.h",
@@ -209,7 +309,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "Loot.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Loot.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Loot.cpp",
@@ -221,7 +321,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "ShopRoom.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\ShopRoom.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\ShopRoom.h",
@@ -233,7 +333,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "ShopRoom.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\ShopRoom.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\ShopRoom.cpp",
@@ -245,7 +345,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "RestRoom.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\RestRoom.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\RestRoom.h",
@@ -257,7 +357,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 17,
               "Title": "RestRoom.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\RestRoom.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\RestRoom.cpp",
@@ -269,7 +369,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "BossRoom.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BossRoom.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\BossRoom.h",
@@ -281,7 +381,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 19,
               "Title": "BossRoom.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\BossRoom.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\BossRoom.cpp",
@@ -293,7 +393,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 20,
               "Title": "EliteRoom.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\EliteRoom.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\EliteRoom.cpp",
@@ -305,7 +405,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 21,
               "Title": "EliteRoom.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\EliteRoom.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\EliteRoom.h",
@@ -317,7 +417,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 22,
               "Title": "Monster.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Monster.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Monster.cpp",
@@ -329,7 +429,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 23,
               "Title": "Monster.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Monster.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Monster.h",
@@ -341,7 +441,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "Room.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Room.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Room.h",
@@ -353,7 +453,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 25,
               "Title": "MapGenerator.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\MapGenerator.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\MapGenerator.h",
@@ -365,7 +465,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 26,
               "Title": "MapGenerator.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\MapGenerator.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\MapGenerator.cpp",
@@ -377,7 +477,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 27,
               "Title": "WorldState.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\WorldState.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\WorldState.h",
@@ -389,7 +489,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 28,
               "Title": "WorldState.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\WorldState.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\WorldState.cpp",
@@ -401,7 +501,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 29,
               "Title": "Game.h",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Game.h",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Game.h",
@@ -413,7 +513,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 31,
               "Title": "Game.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\Game.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\Game.cpp",
@@ -425,7 +525,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 30,
               "Title": "main.cpp",
               "DocumentMoniker": "D:\\\u0420\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438\\Slay_the_Labyrinth rep\\Slay_the_Labyrinth\\Slay_the_Labyrinth_Project\\Slay_the_Labyrinth_Project\\main.cpp",
               "RelativeDocumentMoniker": "Slay_the_Labyrinth_Project\\main.cpp",
