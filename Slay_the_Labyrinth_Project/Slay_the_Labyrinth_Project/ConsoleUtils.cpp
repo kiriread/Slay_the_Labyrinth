@@ -1,16 +1,18 @@
 #include "ConsoleUtils.h"
-
-#include <conio.h>
 #include <windows.h>
-
 #include <iostream>
+#include <conio.h>
 
-void ClearScreen() { system("cls"); }
-
-void DrawText(int x, int y, const std::string& text) {
-  COORD coord = {(SHORT)x, (SHORT)y};
-  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-  std::cout << text;
+void ConsoleUtils::ClearScreen() {
+    system("cls");
 }
 
-int GetKey() { return _getch(); }
+void ConsoleUtils::Print(int x, int y, const std::string& text) {
+    COORD coord = { (SHORT)x, (SHORT)y };
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+    std::cout << text;
+}
+
+int ConsoleUtils::GetKey() {
+    return _getch();
+}
