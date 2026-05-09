@@ -127,6 +127,7 @@
     <ClCompile Include="BattleManager.cpp" />
     <ClCompile Include="BattleUnit.cpp" />
     <ClCompile Include="BossRoom.cpp" />
+    <ClCompile Include="ConsoleUtils.cpp" />
     <ClCompile Include="EliteRoom.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="BattleManager.h" />
     <ClInclude Include="BattleUnit.h" />
     <ClInclude Include="BossRoom.h" />
+    <ClInclude Include="ConsoleUtils.h" />
     <ClInclude Include="EliteRoom.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
