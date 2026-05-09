@@ -1,9 +1,9 @@
 #include "Player.h"
 
-Player::Player(std::string className, Stats stats) 
+Player::Player(std::string className, Stats stats)
+    : className(className)
+    , stats(stats)
 {
-    this->className = className;
-    this->stats = stats;
-    this->stats.CurrentHP = this->stats.MaxHP;
-    this->stats.CurrentMP = this->stats.MaxMP;
+    stats.CurrentHP = stats.MaxHP;
+    stats.CurrentMP = stats.MaxMP;
 }
