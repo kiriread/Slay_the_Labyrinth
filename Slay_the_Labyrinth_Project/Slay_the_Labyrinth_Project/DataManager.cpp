@@ -73,3 +73,39 @@ std::vector<std::string> DataManager::GetClassSpells(
 
   return spells;
 }
+
+void DataManager::LoadRooms(const std::string& filepath) {
+    std::ifstream file(filepath);
+    file >> m_roomData;
+}
+
+std::string DataManager::RoomTypeToString(RoomType type) {
+    switch (type) {
+    case RoomType::REST:    return "REST";
+    case RoomType::SHOP:    return "SHOP";
+    case RoomType::MONSTER: return "MONSTER";
+    case RoomType::ELITE:   return "ELITE";
+    case RoomType::BOSS:    return "BOSS";
+    default:                return "";
+    }
+}
+
+std::string DataManager::GetRoomName(RoomType type) {
+    std::string key = RoomTypeToString(type);
+    return UTF8to1251(m_roomData["room_names"][key]);
+}
+
+std::string DataManager::GetRoomDescription(RoomType type) {
+    std::string key = RoomTypeToString(type);
+    return UTF8to1251(m_roomData["room_descriptions"][key]);
+}
+
+void DataManager::LoadStrings(const std::string& filepath) {
+    std::ifstream file(filepath);
+    file >> m_stringsData;
+}
+
+std::string DataManager::GetString(const std::string& key) {
+    if (!m_stringsData.contains(key)) return "";
+    return UTF8to1251(m_stringsData[key]);
+}

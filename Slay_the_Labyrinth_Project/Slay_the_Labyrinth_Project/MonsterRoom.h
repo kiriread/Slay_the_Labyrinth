@@ -2,8 +2,8 @@
 
 #include "Room.h"
 
-class BossRoom : public Room {
+class MonsterRoom : public Room {
 public:
-	BossRoom();
+	MonsterRoom();
 	void OnEnter(Player* player) override;
 };

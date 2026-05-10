@@ -3,9 +3,7 @@
 #include "Player.h"
 
 RestRoom::RestRoom() : Room(RoomType::REST) {
-  m_description =
-      "Вы находите тихий уголок. Воздух теплый и успокаивающий. Вас манит "
-      "остановиться и восстановить HP и MP";
+  m_description = "";
 }
 
 void RestRoom::OnEnter(Player* player) {
