@@ -138,6 +138,7 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RestRoom.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="ShopRoom.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="WorldState.cpp" />
