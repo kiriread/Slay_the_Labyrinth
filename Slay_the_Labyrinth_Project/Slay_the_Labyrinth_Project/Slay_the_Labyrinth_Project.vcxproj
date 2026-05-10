@@ -136,6 +136,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapGenerator.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MonsterRoom.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RestRoom.cpp" />
     <ClCompile Include="Room.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Loot.h" />
     <ClInclude Include="MapGenerator.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="MonsterRoom.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RestRoom.h" />
     <ClInclude Include="Room.h" />

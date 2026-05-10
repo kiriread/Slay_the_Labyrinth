@@ -4,3 +4,7 @@ Room::Room(RoomType type) : m_type(type) {
 }
 
 Room::~Room() = default;
+
+std::string Room::GetDescription() const {
+    return m_description;
+}

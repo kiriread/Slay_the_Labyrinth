@@ -1,0 +1,14 @@
+{
+  "intro_line1": "Вы просыпаетесь в темной сырой комнате, совершенно позабыв кто вы и почему тут находитесь.",
+  "choose_class": "Вспомните кто вы:",
+  "your_class": "Ваш класс: ",
+
+  "hp_label": "HP: ",
+  "mp_label": "MP: ",
+  "atk_label": "ATK: ",
+  "spd_label": "SPD: ",
+  "int_label": "INT: ",
+
+  "count_label": "Комната:",
+  "choose_room": "Выберите комнату:"
+}
