@@ -10,6 +10,7 @@ class Room {
  protected:
   RoomType m_type;
   std::string m_description;
+  std::string m_resultText;
 
  public:
   Room(RoomType type);
@@ -21,4 +22,6 @@ class Room {
   virtual void OnEnter(Player* player) = 0;
 
   void SetDescription(const std::string& desc);
+
+  std::string GetResultText() const { return m_resultText; }
 };

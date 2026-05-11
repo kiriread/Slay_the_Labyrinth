@@ -11,6 +11,7 @@ void RestRoom::OnEnter(Player* player) {
   player->RestoreHP(hpRestored);
   player->RestoreMP(mpRestored);
 
-  m_description += "\nВосстановлено " + std::to_string(hpRestored) + " HP и " +
-                   std::to_string(mpRestored) + " MP.";
+  m_resultText = "Восстановлено " + std::to_string(hpRestored) + " HP и " +
+                 std::to_string(mpRestored) + " MP.";
 }
+
