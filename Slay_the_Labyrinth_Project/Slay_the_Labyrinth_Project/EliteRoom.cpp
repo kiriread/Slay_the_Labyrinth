@@ -1,8 +1,6 @@
 #include "EliteRoom.h"
 
-EliteRoom::EliteRoom() : Room(RoomType::REST) {
-    m_description = "";
-}
+EliteRoom::EliteRoom() : Room(RoomType::REST) {}
 
 void EliteRoom::OnEnter(Player* player) {
 

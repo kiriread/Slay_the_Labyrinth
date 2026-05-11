@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Room.h"
 #include "Stats.h"
+#include "RestRoom.h"
 
 class Game {
  private:

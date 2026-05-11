@@ -16,6 +16,7 @@ void Game::Run() {
     Render();
     int key = m_console.GetKey();
     ProcessInput(key);
+    ShowRoomChoice();
   }
 }
 
@@ -95,6 +96,10 @@ void Game::Render() {
   m_console.Print(0, 6,
                   m_dataManager.GetString("int_label") +
                       std::to_string(m_player->GetINT()));
+
+  m_console.Print(0, 8, m_dataManager.GetString("intro_line2"));
+
+  m_console.Print(0, 11, m_dataManager.GetString("continue"));
 }
 
 void Game::ProcessInput(int key) {
@@ -104,7 +109,7 @@ void Game::ProcessInput(int key) {
 void Game::ShowRoomChoice() {
   m_roomOptions = m_mapGenerator.GenerateRoomOptions(m_currentCount);
   int choice = 0;
-  int maxChoice = static_cast<int>(m_roomOptions.size()) - 1;
+  int maxChoice = (int)m_roomOptions.size() - 1;
 
   while (true) {
     m_console.ClearScreen();
@@ -112,14 +117,14 @@ void Game::ShowRoomChoice() {
     m_console.Print(0, 0,
                     m_dataManager.GetString("count_label") + " " +
                         std::to_string(m_currentCount) + "/10");
-    m_console.Print(0, 1, m_dataManager.GetString("choose_room"));
+    m_console.Print(0, 2, m_dataManager.GetString("choose_room"));
 
-    for (size_t i = 0; i < m_roomOptions.size(); i++) {
+    for (int i = 0; i < m_roomOptions.size(); i++) {
       std::string name = m_dataManager.GetRoomName(m_roomOptions[i]);
-      if (static_cast<int>(i) == choice) {
-        m_console.Print(1, 3 + static_cast<int>(i), "> " + name);
+      if (i == choice) {
+        m_console.Print(1, 3 + i, "> " + name);
       } else {
-        m_console.Print(1, 3 + static_cast<int>(i), "  " + name);
+        m_console.Print(1, 3 + i, "  " + name);
       }
     }
 
@@ -150,7 +155,7 @@ void Game::EnterRoom(RoomType type) {
 
   switch (type) {
     case RoomType::REST:
-      /*room = new RestRoom();*/
+      room = new RestRoom();
       break;
     case RoomType::SHOP:
       // room = new ShopRoom();
@@ -167,17 +172,15 @@ void Game::EnterRoom(RoomType type) {
   }
 
   if (room != nullptr) {
+    room->SetDescription(m_dataManager.GetRoomDescription(type));
+
     m_console.ClearScreen();
     m_console.Print(0, 0, room->GetDescription());
-    m_console.GetKey();  // Wait for keypress
-
     room->OnEnter(m_player);
-
-    m_console.Print(0, 10, "Press any key to continue...");
+    m_console.Print(0, 2, m_dataManager.GetString("continue"));
     m_console.GetKey();
 
     delete room;
+    m_currentCount++;
   }
-
-  m_currentCount++;
 }

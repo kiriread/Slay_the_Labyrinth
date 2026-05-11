@@ -19,4 +19,6 @@ class Room {
   std::string GetDescription() const;
 
   virtual void OnEnter(Player* player) = 0;
+
+  void SetDescription(const std::string& desc);
 };

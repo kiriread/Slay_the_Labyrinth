@@ -1,8 +1,6 @@
 #include "MonsterRoom.h"
 
-MonsterRoom::MonsterRoom() : Room(RoomType::REST) {
-    m_description = "";
-}
+MonsterRoom::MonsterRoom() : Room(RoomType::REST) {}
 
 void MonsterRoom::OnEnter(Player* player) {
 
