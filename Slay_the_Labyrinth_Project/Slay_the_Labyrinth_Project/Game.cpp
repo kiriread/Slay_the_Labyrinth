@@ -11,11 +11,11 @@ Game::~Game() { delete m_player; }
 
 void Game::Run() {
   ShowMainMenu();
+  Render();
 
   while (m_isRunning) {
-    Render();
     int key = m_console.GetKey();
-    ProcessInput(key);
+    /*ProcessInput(key);*/
     ShowRoomChoice();
   }
 }
@@ -30,18 +30,20 @@ void Game::ShowMainMenu() {
 
     // Draw menu header
     m_console.Print(0, 0, m_dataManager.GetString("intro_line1"));
-    m_console.Print(0, 2, m_dataManager.GetString("choose_class"));
+    m_console.Print(0, 2, m_dataManager.GetString("intro_line2"));
+    m_console.Print(0, 5, m_dataManager.GetString("choose_class"));
 
     // Draw class options with arrow indicator
     for (int i = 0; i < 3; i++) {
       std::string name = m_dataManager.GetClassNamee(ids[i]);
       if (i == choice) {
-        m_console.Print(1, 4 + i, "> " + name);  // Highlighted
+        m_console.Print(1, 7 + i, "> " + name);  // Highlighted
       } else {
-        m_console.Print(1, 4 + i, "  " + name);  // Normal
+        m_console.Print(1, 7 + i, "  " + name);  // Normal
       }
     }
 
+    m_console.Print(0, 11, m_dataManager.GetString("continueEnter"));
     int key = m_console.GetKey();
 
     // Handle arrow keys (two-code escape sequence)
@@ -97,9 +99,7 @@ void Game::Render() {
                   m_dataManager.GetString("int_label") +
                       std::to_string(m_player->GetINT()));
 
-  m_console.Print(0, 8, m_dataManager.GetString("intro_line2"));
-
-  m_console.Print(0, 11, m_dataManager.GetString("continue"));
+  m_console.Print(0, 8, m_dataManager.GetString("continue"));
 }
 
 void Game::ProcessInput(int key) {
@@ -128,6 +128,7 @@ void Game::ShowRoomChoice() {
       }
     }
 
+    m_console.Print(0, 7, m_dataManager.GetString("continueEnter"));
     int key = m_console.GetKey();
 
     if (key == 224) {
@@ -158,16 +159,16 @@ void Game::EnterRoom(RoomType type) {
       room = new RestRoom();
       break;
     case RoomType::SHOP:
-      // room = new ShopRoom();
+      room = new ShopRoom();
       break;
     case RoomType::MONSTER:
-      // room = new MonsterRoom();
+      room = new MonsterRoom();
       break;
     case RoomType::ELITE:
-      // room = new EliteRoom();
+      room = new EliteRoom();
       break;
     case RoomType::BOSS:
-      // room = new BossRoom();
+      room = new BossRoom();
       break;
   }
 
@@ -177,7 +178,8 @@ void Game::EnterRoom(RoomType type) {
     m_console.ClearScreen();
     m_console.Print(0, 0, room->GetDescription());
     room->OnEnter(m_player);
-    m_console.Print(0, 2, m_dataManager.GetString("continue"));
+    m_console.Print(0, 2, room->GetResultText());
+    m_console.Print(0, 4, m_dataManager.GetString("continue"));
     m_console.GetKey();
 
     delete room;
