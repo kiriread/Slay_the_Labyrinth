@@ -2,9 +2,7 @@
 
 #include "Player.h"
 
-RestRoom::RestRoom() : Room(RoomType::REST) {
-  m_description = "";
-}
+RestRoom::RestRoom() : Room(RoomType::REST) {}
 
 void RestRoom::OnEnter(Player* player) {
   int hpRestored = (player->GetMaxHP() * 20) / 100;
