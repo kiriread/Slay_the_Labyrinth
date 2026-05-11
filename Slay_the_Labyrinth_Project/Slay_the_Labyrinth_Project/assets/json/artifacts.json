@@ -1,0 +1,97 @@
+{
+  "healing_sprout": {
+    "name": "Исцеляющий росток",
+    "description": "Восстанавливает 5 ед. здоровья каждый ход",
+    "price": 100
+  },
+  "sleep_pillow": {
+    "name": "Подушка для сна",
+    "description": "Место под ночлег восстанавливает на 10 * (макс. здоровье /100) здоровья больше",
+    "price": 120
+  },
+  "sleep_blanket": {
+    "name": "Одеяло для сна",
+    "description": "Место под ночлег восстанавливает на 10 * (макс. мана / 100) маны больше",
+    "price": 120
+  },
+  "speed_boots": {
+    "name": "Быстросходы",
+    "description": "+5 скорости",
+    "price": 150
+  },
+  "whetstone": {
+    "name": "Точильный камень",
+    "description": "+5 атаки",
+    "price": 150
+  },
+  "banana": {
+    "name": "Банан",
+    "description": "+10 здоровья",
+    "price": 80
+  },
+  "pear": {
+    "name": "Груша",
+    "description": "+5 здоровья",
+    "price": 50
+  },
+  "clover_petal": {
+    "name": "Лепесток клевера",
+    "description": "+20% золота после боя",
+    "price": 200
+  },
+  "discount_coupon": {
+    "name": "Скидочный купон",
+    "description": "50% скидка у торговца",
+    "price": 180
+  },
+  "magic_stone": {
+    "name": "Магический камень",
+    "description": "+15 маны",
+    "price": 130
+  },
+  "trial_amulet": {
+    "name": "Амулет испытаний",
+    "description": "Урон по элитным монстрам и боссу увеличен на 10",
+    "price": 250
+  },
+  "ancient_tome": {
+    "name": "Древний фолиант",
+    "description": "+5 интеллекта",
+    "price": 150
+  },
+  "berserk_talisman": {
+    "name": "Талисман берсерка",
+    "description": "+3 к атаке и +3 к скорости",
+    "price": 200
+  },
+  "diadem": {
+    "name": "Диадема",
+    "description": "Восстанавливает 5 ед. маны каждый ход",
+    "price": 220
+  },
+  "sleeping_pill": {
+    "name": "Снотворное",
+    "description": "Место под ночлег дает +10 здоровья",
+    "price": 100
+  },
+  "humidifier": {
+    "name": "Увлажнитель",
+    "description": "Место под ночлег дает +10 маны",
+    "price": 100
+  },
+  "perfection_armor": {
+    "name": "Доспех безупречности",
+    "description": "При прохождении боя с макс. здоровьем, повышает ВСЕ характеристики на 3",
+    "price": 400
+  },
+  "revival_amulet": {
+    "name": "Амулет возрождения",
+    "description": "Возрождает один раз за игру с 30% здоровья",
+    "price": 400
+  },
+  "magic_boulder": {
+    "name": "Магический булыжник",
+    "description": "+25 маны",
+    "price": 200
+  }
+}

@@ -11,6 +11,7 @@ private:
     nlohmann::json m_classData;
     nlohmann::json m_roomData;
     nlohmann::json m_stringsData;
+    nlohmann::json m_artifactsData;
     std::string UTF8to1251(const std::string& utf8);
 
 public:
@@ -29,4 +30,11 @@ public:
     // Strings
     void LoadStrings(const std::string& filepath);
     std::string GetString(const std::string& key);
+
+    // Artifacts
+    void LoadArtifacts(const std::string& filepath);
+    std::string GetArtifactName(const std::string& id) const;
+    std::string GetArtifactDescription(const std::string& id) const;
+    int GetArtifactPrice(const std::string& id) const;
+    std::vector<std::string> GetRandomArtifactIds(int count) const;
 };
