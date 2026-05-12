@@ -25,11 +25,12 @@ class Game {
   std::vector<RoomType> m_roomOptions;
   MapGenerator m_mapGenerator;
 
-  void ShowMainMenu();
-  void Render();
-  void ProcessInput(int key);
-  void ShowRoomChoice();
+  void MainMenu();
+  /*void YourChoice();*/
+  /*void ProcessInput(int key);*/
+  void RoomChoice();
   void EnterRoom(RoomType type);
+  void HUD();  
 
  public:
   Game();
