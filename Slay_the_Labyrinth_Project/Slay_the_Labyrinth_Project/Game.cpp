@@ -4,7 +4,7 @@ Game::Game() : m_isRunning(false), m_player(nullptr) {
   m_dataManager.LoadClasses("assets/json/classes.json");
   m_dataManager.LoadRooms("assets/json/rooms.json");
   m_dataManager.LoadStrings("assets/json/strings.json");
-  m_dataManager.LoadArtifacts("assets/json/artifacts.json");
+  /*m_dataManager.LoadArtifacts("assets/json/artifacts.json");*/
   m_currentCount = 1;
 }
 

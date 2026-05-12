@@ -32,9 +32,9 @@ public:
     std::string GetString(const std::string& key);
 
     // Artifacts
-    void LoadArtifacts(const std::string& filepath);
+    /*void LoadArtifacts(const std::string& filepath);
     std::string GetArtifactName(const std::string& id) const;
     std::string GetArtifactDescription(const std::string& id) const;
     int GetArtifactPrice(const std::string& id) const;
-    std::vector<std::string> GetRandomArtifactIds(int count) const;
+    std::vector<std::string> GetRandomArtifactIds(int count) const;*/
 };
