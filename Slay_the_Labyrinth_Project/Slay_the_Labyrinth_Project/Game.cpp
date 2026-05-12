@@ -74,39 +74,6 @@ void Game::MainMenu() {
   m_isRunning = true;
 }
 
-// void Game::YourChoice() {
-//   m_console.ClearScreen();
-//
-//   // Player class
-//   m_console.Print(
-//       0, 0, m_dataManager.GetString("your_class") +
-//       m_player->GetClassName());
-//
-//   // Stats
-//   m_console.Print(0, 2,
-//                   m_dataManager.GetString("hp_label") +
-//                       std::to_string(m_player->GetCurrentHP()) + " / " +
-//                       std::to_string(m_player->GetMaxHP()));
-//   m_console.Print(0, 3,
-//                   m_dataManager.GetString("mp_label") +
-//                       std::to_string(m_player->GetCurrentMP()) + " / " +
-//                       std::to_string(m_player->GetMaxMP()));
-//   m_console.Print(0, 4,
-//                   m_dataManager.GetString("atk_label") +
-//                       std::to_string(m_player->GetATK()));
-//   m_console.Print(0, 5,
-//                   m_dataManager.GetString("spd_label") +
-//                       std::to_string(m_player->GetSPD()));
-//   m_console.Print(0, 6,
-//                   m_dataManager.GetString("int_label") +
-//                       std::to_string(m_player->GetINT()));
-//
-//   m_console.Print(0, 8, m_dataManager.GetString("continue"));
-// }
-
-// void Game::ProcessInput(int key) {
-// }
-
 void Game::RoomChoice() {
   m_roomOptions = m_mapGenerator.GenerateRoomOptions(m_currentCount);
   int choice = 0;
@@ -161,7 +128,7 @@ void Game::EnterRoom(RoomType type) {
       room = new RestRoom();
       break;
     case RoomType::SHOP:
-      room = new ShopRoom();
+      room = new ShopRoom(&m_dataManager, &m_console);
       break;
     case RoomType::MONSTER:
       room = new MonsterRoom();
@@ -176,11 +143,22 @@ void Game::EnterRoom(RoomType type) {
 
   if (room != nullptr) {
     room->SetDescription(m_dataManager.GetRoomDescription(type));
-    room->OnEnter(m_player);
 
     m_console.ClearScreen();
     HUD();
-    m_console.Print(0, 1, room->GetDescription());
+
+    // Для ShopRoom описание выводится внутри самой комнаты
+    if (type != RoomType::SHOP) {
+      m_console.Print(0, 1, room->GetDescription());
+    }
+
+    room->OnEnter(m_player);
+
+    if (type == RoomType::SHOP) {
+      m_console.ClearScreen();
+      HUD();
+    }
+
     m_console.Print(0, 3, room->GetResultText());
     m_console.Print(0, 11, m_dataManager.GetString("continue"));
     m_console.GetKey();
@@ -191,7 +169,7 @@ void Game::EnterRoom(RoomType type) {
 }
 
 void Game::HUD() {
-  int x = 60;
+  int x = 80;
   // Класс игрока
   m_console.Print(
       x, 1,
@@ -213,7 +191,7 @@ void Game::HUD() {
                       std::to_string(m_player->GetSPD()) + "  " +
                       m_dataManager.GetString("int_label") +
                       std::to_string(m_player->GetINT()));
-  m_console.Print(x, 5, "GLD: " /*+ std::to_string(m_player->GetGold())*/);
+  m_console.Print(x, 5, "GLD: " + std::to_string(m_player->GetGold()));
 
   // Разделитель
   m_console.Print(x, 6, "--------------------------");
@@ -227,18 +205,17 @@ void Game::HUD() {
   }
   m_console.Print(x, 7, spellsText);
 
-  //// Артефакты
-  // std::string artifactsText = "Артефакты: ";
-  // auto& inventory = m_player->GetInventory();
-  // if (inventory.empty()) {
-  //     artifactsText += "(нет)";
-  // }
-  // else {
-  //     for (size_t i = 0; i < inventory.size(); i++) {
-  //         artifactsText += m_dataManager.GetArtifactName(inventory[i]);
-  //         if (i < inventory.size() - 1) artifactsText += ", ";
-  //     }
-  // }
+  // Артефакты
+  std::string artifactsText = "Артефакты: ";
+  auto& inventory = m_player->GetInventory();
+  if (inventory.empty()) {
+    artifactsText += "(нет)";
+  } else {
+    for (size_t i = 0; i < inventory.size(); i++) {
+      artifactsText += m_dataManager.GetArtifactName(inventory[i]);
+      if (i < inventory.size() - 1) artifactsText += ", ";
+    }
+  }
   m_console.Print(x, 8, "Артефакты: ");
 
   // Разделитель

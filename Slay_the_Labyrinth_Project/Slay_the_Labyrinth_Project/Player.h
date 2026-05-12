@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include "Stats.h"
 
@@ -8,6 +9,8 @@ class Player {
  private:
   std::string m_className;
   Stats m_stats;
+  int m_gold = 1000;
+  std::vector<std::string> m_inventory;
 
  public:
   Player(std::string className, Stats stats);
@@ -24,4 +27,10 @@ class Player {
 
   void RestoreHP(int amount);
   void RestoreMP(int aomount);
+
+  int GetGold() const;
+  void AddGold(int amount);
+  bool SpendGold(int amount);
+  void AddArtifact(const std::string& id);
+  const std::vector<std::string>& GetInventory() const;
 };
