@@ -12,29 +12,29 @@ private:
     nlohmann::json m_roomData;
     nlohmann::json m_stringsData;
     nlohmann::json m_artifactsData;
-    std::string UTF8to1251(const std::string& utf8);
+    std::string UTF8to1251(const std::string& utf8) const;
 
 public:
-    // Classes
+    // Классы
     void LoadClasses(const std::string& filepath);
     Stats GetClassStats(const std::string& classId);
     std::string GetClassNamee(const std::string& classId);
     std::vector<std::string> GetClassSpells(const std::string& classId);
 
-    // Rooms
+    // Комнаты
     void LoadRooms(const std::string& filepath);
     std::string GetRoomName(RoomType type);
     std::string GetRoomDescription(RoomType type);
     std::string RoomTypeToString(RoomType type);
 
-    // Strings
+    // Строки
     void LoadStrings(const std::string& filepath);
     std::string GetString(const std::string& key);
 
-    // Artifacts
-    /*void LoadArtifacts(const std::string& filepath);
+    // Артефакты
+    void LoadArtifacts(const std::string& filepath);
     std::string GetArtifactName(const std::string& id) const;
     std::string GetArtifactDescription(const std::string& id) const;
     int GetArtifactPrice(const std::string& id) const;
-    std::vector<std::string> GetRandomArtifactIds(int count) const;*/
+    std::vector<std::string> GetRandomArtifactIds(int count) const;
 };

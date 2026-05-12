@@ -4,6 +4,8 @@
 
 #include <fstream>
 #include <iostream>
+#include <algorithm>
+#include <random>
 
 void DataManager::LoadClasses(const std::string& filepath) {
   std::ifstream file(filepath);
@@ -38,7 +40,7 @@ Stats DataManager::GetClassStats(const std::string& classId) {
   return stats;
 }
 
-std::string DataManager::UTF8to1251(const std::string& utf8) {
+std::string DataManager::UTF8to1251(const std::string& utf8) const {
   int size = MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, nullptr, 0);
   std::wstring wtext(size, L'\0');
   MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, &wtext[0], size);
@@ -76,7 +78,12 @@ std::vector<std::string> DataManager::GetClassSpells(
 
 void DataManager::LoadRooms(const std::string& filepath) {
     std::ifstream file(filepath);
+    if (!file.is_open()) {
+        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
+        return;
+    }
     file >> m_roomData;
+    file.close();
 }
 
 std::string DataManager::RoomTypeToString(RoomType type) {
@@ -102,10 +109,71 @@ std::string DataManager::GetRoomDescription(RoomType type) {
 
 void DataManager::LoadStrings(const std::string& filepath) {
     std::ifstream file(filepath);
+    if (!file.is_open()) {
+        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
+        return;
+    }
     file >> m_stringsData;
+    file.close();
 }
 
 std::string DataManager::GetString(const std::string& key) {
     if (!m_stringsData.contains(key)) return "";
     return UTF8to1251(m_stringsData[key]);
+}
+
+void DataManager::LoadArtifacts(const std::string& filepath) {
+    std::ifstream file(filepath);
+    if (!file.is_open()) {
+        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
+        return;
+    }
+    file >> m_artifactsData;
+    file.close();
+}
+
+std::string DataManager::GetArtifactName(const std::string& id) const {
+    if (!m_artifactsData.contains(id)) {
+        return "Неизвестно";
+    }
+    return UTF8to1251(m_artifactsData[id]["name"]);
+}
+
+std::string DataManager::GetArtifactDescription(const std::string& id) const {
+    if (!m_artifactsData.contains(id)) {
+        return "";
+    }
+    return UTF8to1251(m_artifactsData[id]["description"]);
+}
+
+int DataManager::GetArtifactPrice(const std::string& id) const {
+    if (!m_artifactsData.contains(id)) {
+        return 0;
+    }
+    return m_artifactsData[id]["price"];
+}
+
+// Получить список случайных ID артефактов
+std::vector<std::string> DataManager::GetRandomArtifactIds(int count) const {
+    std::vector<std::string> ids;
+
+    // Собрать все ключи (ID артефактов) из JSON
+    for (auto& item : m_artifactsData.items()) {
+        ids.push_back(item.key());
+    }
+
+    // Перемешать случайным образом
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(ids.begin(), ids.end(), g);
+
+    // Вернуть первые count штук (или сколько есть)
+    int resultSize;
+    if (count < (int)ids.size()) {
+        resultSize = count;
+    }
+    else {
+        resultSize = (int)ids.size();
+    }
+    return std::vector<std::string>(ids.begin(), ids.begin() + resultSize);
 }
