@@ -1,7 +1,11 @@
 #include "BossRoom.h"
 
-BossRoom::BossRoom() : Room(RoomType::REST) {}
+#include "BattleManager.h"
+
+BossRoom::BossRoom() : Room(RoomType::BOSS) {}
 
 void BossRoom::OnEnter(Player* player) {
-	m_resultText = "Победа!";
+  BattleManager bm(player);
+  bm.StartBattle(RoomType::BOSS);
+  m_resultText = "Победа!";
 }
