@@ -102,6 +102,4 @@ void BattleManager::EnemyHUD() {
     m_console.Print(x, 3, "ATK: " + std::to_string(m_enemy->GetATK()));
     m_console.Print(x, 4, "SPD: " + std::to_string(m_enemy->GetSPD()));
     m_console.Print(x, 5, "Инициативность врага: " + std::to_string(m_eInitiative));
-    if (m_isPlayerTurn)
-        m_console.Print(0, 0, "Ваш ход:");
 }
