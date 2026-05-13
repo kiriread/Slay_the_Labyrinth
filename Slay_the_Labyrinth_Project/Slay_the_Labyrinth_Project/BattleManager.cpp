@@ -1,4 +1,4 @@
-﻿#include "BattleManager.h"
+#include "BattleManager.h"
 #include "EnemyCreator.h"
 #include "Enemy.h"
 #include "Player.h"

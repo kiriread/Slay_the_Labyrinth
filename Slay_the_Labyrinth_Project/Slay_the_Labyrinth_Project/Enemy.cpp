@@ -1,4 +1,4 @@
-﻿#include "Enemy.h"
+#include "Enemy.h"
 
 Enemy::Enemy(std::string name, int hp, int atk, int spd) : m_name(name) {
   m_stats.MaxHP = hp;
@@ -13,14 +13,14 @@ void Enemy::TakeDamage(int amount) {
 }
 
 std::vector<Enemy> RegularEnemy() {
-  return {Enemy("Призрак", 30, 20, 50), Enemy("Орк с дубиной", 50, 15, 30),
-          Enemy("Слизень", 60, 16, 20)};
+  return {Enemy("ÐÑÐ¸Ð·ÑÐ°Ðº", 30, 20, 50), Enemy("ÐÑÐº Ñ Ð´ÑÐ±Ð¸Ð½Ð¾Ð¹", 50, 15, 30),
+          Enemy("Ð¡Ð»Ð¸Ð·ÐµÐ½Ñ", 60, 16, 20)};
 }
 
 std::vector<Enemy> EliteEnemy() {
-  return {Enemy("аываолль шаман", 50, 40, 50), Enemy("Огр маг", 70, 30, 30)};
+  return {Enemy("Ð°ÑÐ²Ð°Ð¾Ð»Ð»Ñ ÑÐ°Ð¼Ð°Ð½", 50, 40, 50), Enemy("ÐÐ³Ñ Ð¼Ð°Ð³", 70, 30, 30)};
 }
 
 std::vector<Enemy> Bosses() {
-  return {Enemy("Чёрный дракон", 90, 50, 50), Enemy("Демон крови", 70, 30, 80)};
+  return {Enemy("Ð§ÑÑÐ½ÑÐ¹ Ð´ÑÐ°ÐºÐ¾Ð½", 90, 50, 50), Enemy("ÐÐµÐ¼Ð¾Ð½ ÐºÑÐ¾Ð²Ð¸", 70, 30, 80)};
 }

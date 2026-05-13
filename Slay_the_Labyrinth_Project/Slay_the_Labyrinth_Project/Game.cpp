@@ -1,4 +1,4 @@
-﻿#include "Game.h"
+#include "Game.h"
 
 Game::Game() : m_isRunning(false), m_player(nullptr) {
   m_dataManager.LoadClasses("assets/json/classes.json");
@@ -147,7 +147,7 @@ void Game::EnterRoom(RoomType type) {
     m_console.ClearScreen();
     HUD(80);
 
-    // Для ShopRoom описание выводится внутри самой комнаты
+    // Ð”Ð»Ñ ShopRoom Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ Ð²Ð½ÑƒÑ‚Ñ€Ð¸ ÑÐ°Ð¼Ð¾Ð¹ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñ‹
     if (type != RoomType::SHOP) {
       m_console.Print(0, 1, room->GetDescription());
     }
@@ -169,12 +169,12 @@ void Game::EnterRoom(RoomType type) {
 }
 
 void Game::HUD(int x) {
-  // Класс игрока
+  // ÐšÐ»Ð°ÑÑ Ð¸Ð³Ñ€Ð¾ÐºÐ°
   m_console.Print(
       x, 1,
       m_dataManager.GetString("your_class") + " " + m_player->GetClassName());
 
-  // Характеристики
+  // Õàðàêòåðèñòèêè
   m_console.Print(x, 2,
                   m_dataManager.GetString("hp_label") +
                       std::to_string(m_player->GetCurrentHP()) + " / " +
@@ -194,20 +194,20 @@ void Game::HUD(int x) {
                   m_dataManager.GetString("gld_label") +
                       std::to_string(m_player->GetGold()));
 
-  // Разделитель
+  // Ðàçäåëèòåëü
   m_console.Print(x, 6, "--------------------------");
 
-  // Способности
+  // Ñïîñîáíîñòè
   auto spells = m_dataManager.GetClassSpells(m_player->GetClassName());
-  std::string spellsText = "Способности: ";
+  std::string spellsText = "Ñïîñîáíîñòè: ";
   for (size_t i = 0; i < spells.size(); i++) {
     spellsText += spells[i];
     if (i < spells.size() - 1) spellsText += ", ";
   }
   m_console.Print(x, 7, spellsText);
 
-  // Артефакты
-  std::string artifactsTitle = "Артефакты: ";
+  // Àðòåôàêòû
+  std::string artifactsTitle = "Àðòåôàêòû: ";
   auto& inventory = m_player->GetInventory();
 
   if (inventory.empty()) {
@@ -216,7 +216,7 @@ void Game::HUD(int x) {
   } else {
     m_console.Print(x, 8, artifactsTitle);
 
-    // Каждый артефакт на новой строке
+    // Êàæäûé àðòåôàêò íà íîâîé ñòðîêå
     int line = 9;
     for (size_t i = 0; i < inventory.size(); i++) {
       std::string name = m_dataManager.GetArtifactName(inventory[i]);
@@ -224,7 +224,7 @@ void Game::HUD(int x) {
       line++;
     }
 
-    // Разделитель после последнего артефакта
+    // Ðàçäåëèòåëü ïîñëå ïîñëåäíåãî àðòåôàêòà
     m_console.Print(x, line, "--------------------------");
   }
 }

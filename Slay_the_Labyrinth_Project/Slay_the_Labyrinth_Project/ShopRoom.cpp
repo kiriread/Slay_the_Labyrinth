@@ -1,4 +1,4 @@
-﻿#include "ShopRoom.h"
+#include "ShopRoom.h"
 
 #include "Game.h"
 #include "Player.h"
@@ -21,7 +21,7 @@ void ShopRoom::OnEnter(Player* player) {
     m_console->ClearScreen();
     m_game->HUD(80);
 
-    // Описание и товары
+    // ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð¸ Ñ‚Ð¾Ð²Ð°Ñ€Ñ‹
     m_console->Print(0, 1, m_description);
     m_console->Print(0, 3, m_dataManager->GetString("shop_title"));
 
@@ -42,12 +42,12 @@ void ShopRoom::OnEnter(Player* player) {
       m_console->Print(2, 6 + i * 3, desc);
     }
 
-    // Сообщение
+    // Ñîîáùåíèå
     if (!message.empty()) {
       m_console->Print(0, 18, message);
     }
 
-    // Подсказка
+    // Ïîäñêàçêà
     m_console->Print(0, 20, m_dataManager->GetString("shopContinue"));
 
     int key = m_console->GetKey();
@@ -83,6 +83,6 @@ void ShopRoom::OnEnter(Player* player) {
   }
 
   if (m_stock.empty() and m_resultText.empty()) {
-    m_resultText = "Все товары распроданы.";
+    m_resultText = "Âñå òîâàðû ðàñïðîäàíû.";
   }
 }
