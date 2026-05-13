@@ -1,4 +1,4 @@
-﻿#include "BossRoom.h"
+ï»¿#include "BossRoom.h"
 
 #include "BattleManager.h"
 
@@ -9,5 +9,5 @@ BossRoom::BossRoom(Game* game)
 void BossRoom::OnEnter(Player* player) {
   BattleManager bm(player, m_game);
   bm.StartBattle(RoomType::BOSS);
-  m_resultText = "Победа!";
+  m_resultText = "ÐÐ¾Ð±ÐµÐ´Ð°!";
 }
