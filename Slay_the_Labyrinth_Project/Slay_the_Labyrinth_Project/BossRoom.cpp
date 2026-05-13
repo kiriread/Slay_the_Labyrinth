@@ -1,11 +1,13 @@
-#include "BossRoom.h"
+﻿#include "BossRoom.h"
+
 #include "BattleManager.h"
 
-BossRoom::BossRoom() : Room(RoomType::REST) {
-    m_description = "";
-}
+BossRoom::BossRoom(Game* game) 
+	: Room(RoomType::BOSS)
+	, m_game(game){}
 
 void BossRoom::OnEnter(Player* player) {
-    BattleManager obj;
-    obj.StartBattle(RoomType::BOSS);
+  BattleManager bm(player, m_game);
+  bm.StartBattle(RoomType::BOSS);
+  m_resultText = "Победа!";
 }

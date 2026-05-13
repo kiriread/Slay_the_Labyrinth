@@ -1,11 +1,11 @@
-#include "EliteRoom.h"
-#include "BattleManager.h"
+﻿#include "EliteRoom.h"
 
-EliteRoom::EliteRoom() : Room(RoomType::REST) {
-    m_description = "";
-}
+EliteRoom::EliteRoom(Game* game) 
+	: Room(RoomType::ELITE)
+	, m_game(game){}
 
 void EliteRoom::OnEnter(Player* player) {
-    BattleManager obj;
-    obj.StartBattle(RoomType::ELITE);
+	m_resultText = "Получено X золота, 2 артефакта";
+	BattleManager bm(player, m_game);
+	bm.StartBattle(RoomType::ELITE);
 }
