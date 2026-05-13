@@ -29,11 +29,11 @@ class Game {
   /*void YourChoice();*/
   /*void ProcessInput(int key);*/
   void RoomChoice();
-  void EnterRoom(RoomType type);
-  void HUD();  
+  void EnterRoom(RoomType type); 
 
  public:
   Game();
   ~Game();
   void Run();
+  void HUD();
 };

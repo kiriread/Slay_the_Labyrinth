@@ -9,6 +9,7 @@
   "atk_label": "ATK: ",
   "spd_label": "SPD: ",
   "int_label": "INT: ",
+  "gld_label": "GLD: ",
 
   "count_label": "Комната:",
   "choose_room": "Выберите комнату:",
@@ -19,7 +20,6 @@
   "separator": "--------------------------",
 
   "shop_title": "Товары:",
-  "shop_price_hint": "Цена растёт: x1.0 -> x1.5 -> x2.25 -> x3.375",
   "shop_not_enough_gold": "Недостаточно золота!",
   "shop_purchased": "Куплено: ",
   "shop_leave": "Вы покидаете торговца.",

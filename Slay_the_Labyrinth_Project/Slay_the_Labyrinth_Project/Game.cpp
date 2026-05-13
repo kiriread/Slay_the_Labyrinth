@@ -128,7 +128,7 @@ void Game::EnterRoom(RoomType type) {
       room = new RestRoom();
       break;
     case RoomType::SHOP:
-      room = new ShopRoom(&m_dataManager, &m_console);
+      room = new ShopRoom(&m_dataManager, &m_console, this);
       break;
     case RoomType::MONSTER:
       room = new MonsterRoom();
@@ -191,7 +191,9 @@ void Game::HUD() {
                       std::to_string(m_player->GetSPD()) + "  " +
                       m_dataManager.GetString("int_label") +
                       std::to_string(m_player->GetINT()));
-  m_console.Print(x, 5, "GLD: " + std::to_string(m_player->GetGold()));
+  m_console.Print(x, 5,
+                  m_dataManager.GetString("gld_label") +
+                      std::to_string(m_player->GetGold()));
 
   // Разделитель
   m_console.Print(x, 6, "--------------------------");
@@ -206,18 +208,24 @@ void Game::HUD() {
   m_console.Print(x, 7, spellsText);
 
   // Артефакты
-  std::string artifactsText = "Артефакты: ";
+  std::string artifactsTitle = "Артефакты: ";
   auto& inventory = m_player->GetInventory();
-  if (inventory.empty()) {
-    artifactsText += "(нет)";
-  } else {
-    for (size_t i = 0; i < inventory.size(); i++) {
-      artifactsText += m_dataManager.GetArtifactName(inventory[i]);
-      if (i < inventory.size() - 1) artifactsText += ", ";
-    }
-  }
-  m_console.Print(x, 8, "Артефакты: ");
 
-  // Разделитель
-  m_console.Print(x, 9, "--------------------------");
+  if (inventory.empty()) {
+    m_console.Print(x, 8, artifactsTitle);
+    m_console.Print(x, 9, "--------------------------");
+  } else {
+    m_console.Print(x, 8, artifactsTitle);
+
+    // Каждый артефакт на новой строке
+    int line = 9;
+    for (size_t i = 0; i < inventory.size(); i++) {
+      std::string name = m_dataManager.GetArtifactName(inventory[i]);
+      m_console.Print(x, line, "  " + name);
+      line++;
+    }
+
+    // Разделитель после последнего артефакта
+    m_console.Print(x, line, "--------------------------");
+  }
 }
