@@ -1,4 +1,4 @@
-ï»¿#include "EliteRoom.h"
+﻿#include "EliteRoom.h"
 
 EliteRoom::EliteRoom(Game* game) 
 	: Room(RoomType::ELITE)
