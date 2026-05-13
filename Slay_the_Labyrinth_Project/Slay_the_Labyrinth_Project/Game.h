@@ -35,5 +35,5 @@ class Game {
   Game();
   ~Game();
   void Run();
-  void HUD();
+  void HUD(int x);
 };
