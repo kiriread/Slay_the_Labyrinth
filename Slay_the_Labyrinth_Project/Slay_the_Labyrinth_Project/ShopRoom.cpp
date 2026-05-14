@@ -19,11 +19,10 @@ void ShopRoom::OnEnter(Player* player) {
     if (choice > maxChoice) choice = maxChoice;
 
     m_console->ClearScreen();
-    m_game->HUD(80);
+    m_game->HUD(60);
 
-    // ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð¸ Ñ‚Ð¾Ð²Ð°Ñ€Ñ‹
-    m_console->Print(0, 1, m_description);
-    m_console->Print(0, 3, m_dataManager->GetString("shop_title"));
+    m_console->Print(1, 1, m_description);
+    m_console->Print(1, 3, m_dataManager->GetString("shop_title"));
 
     for (int i = 0; i < (int)m_stock.size(); i++) {
       std::string name = m_dataManager->GetArtifactName(m_stock[i]);
@@ -35,20 +34,18 @@ void ShopRoom::OnEnter(Player* player) {
         line = "> ";
       else
         line = "  ";
-      line += name + " — " + std::to_string(price) +
+      line += name + " - " + std::to_string(price) +
               m_dataManager->GetString("shop_gold_suffix");
 
-      m_console->Print(0, 5 + i * 3, line);
-      m_console->Print(2, 6 + i * 3, desc);
+      m_console->Print(1, 5 + i * 3, line);
+      m_console->Print(3, 6 + i * 3, desc);
     }
 
-    // Ñîîáùåíèå
     if (!message.empty()) {
-      m_console->Print(0, 18, message);
+      m_console->Print(1, 13, message);
     }
 
-    // Ïîäñêàçêà
-    m_console->Print(0, 20, m_dataManager->GetString("shopContinue"));
+    /*m_console->Print(1, 14, m_dataManager->GetString("shopContinue"));*/
 
     int key = m_console->GetKey();
 
@@ -83,6 +80,6 @@ void ShopRoom::OnEnter(Player* player) {
   }
 
   if (m_stock.empty() and m_resultText.empty()) {
-    m_resultText = "Âñå òîâàðû ðàñïðîäàíû.";
+    m_resultText = m_dataManager->GetString("shop_all_buyed");
   }
 }
