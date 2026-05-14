@@ -10,18 +10,23 @@
   "spd_label": "SPD: ",
   "int_label": "INT: ",
   "gld_label": "GLD: ",
+  "spells_label": "Способности: ",
+  "artifacts_label": "Артефакты: ",
 
   "count_label": "Комната:",
   "choose_room": "Выберите комнату:",
 
-  "continueEnter": "(Переключение стрелками вверх вниз, ENTER - выбор)",
+  "rules": "(Управление:",
+  "continueEnter": "(Управление: Переключение стрелками вверх-вниз, ENTER - выбор, продолжение, ESC — выйти(Торговец))",
   "continue": "(Нажмите любую клавишу для продолжения)",
-  "shopContinue": "(Переключение стрелками вверх вниз, Enter — купить, ESC — выйти)",
+  "shopContinue": "(Переключение стрелками ввер-вниз; Enter — купить; ESC — выйти)",
   "separator": "--------------------------",
+  "total": "Итог:",
 
   "shop_title": "Товары:",
   "shop_not_enough_gold": "Недостаточно золота!",
   "shop_purchased": "Куплено: ",
   "shop_leave": "Вы покидаете торговца.",
-  "shop_gold_suffix": " золота"
+  "shop_gold_suffix": " золота",
+  "shop_all_buyed": "Все товары распроданы."
 }

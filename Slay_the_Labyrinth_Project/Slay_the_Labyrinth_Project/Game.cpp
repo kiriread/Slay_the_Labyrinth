@@ -30,21 +30,22 @@ void Game::MainMenu() {
     m_console.ClearScreen();
 
     // Draw menu header
-    m_console.Print(0, 1, m_dataManager.GetString("intro_line1"));
-    m_console.Print(0, 2, m_dataManager.GetString("intro_line2"));
-    m_console.Print(0, 5, m_dataManager.GetString("choose_class"));
+    m_console.Print(1, 1, m_dataManager.GetString("intro_line1"));
+    m_console.Print(1, 2, m_dataManager.GetString("intro_line2"));
+    m_console.Print(1, 5, m_dataManager.GetString("choose_class"));
 
     // Draw class options with arrow indicator
     for (int i = 0; i < 3; i++) {
       std::string name = m_dataManager.GetClassNamee(ids[i]);
       if (i == choice) {
-        m_console.Print(1, 7 + i, "> " + name);  // Highlighted
+        m_console.Print(2, 7 + i, "> " + name);  // Highlighted
       } else {
-        m_console.Print(1, 7 + i, "  " + name);  // Normal
+        m_console.Print(2, 7 + i, "  " + name);  // Normal
       }
     }
 
-    m_console.Print(0, 11, m_dataManager.GetString("continueEnter"));
+    /*m_console.Print(1, 11, m_dataManager.GetString("rules"));*/
+    m_console.Print(1, 12, m_dataManager.GetString("continueEnter"));
     int key = m_console.GetKey();
 
     // Handle arrow keys (two-code escape sequence)
@@ -81,23 +82,23 @@ void Game::RoomChoice() {
 
   while (true) {
     m_console.ClearScreen();
-    HUD(80);
+    HUD(60);
 
-    m_console.Print(0, 1,
+    m_console.Print(1, 1,
                     m_dataManager.GetString("count_label") + " " +
                         std::to_string(m_currentCount) + "/10");
-    m_console.Print(0, 2, m_dataManager.GetString("choose_room"));
+    m_console.Print(1, 2, m_dataManager.GetString("choose_room"));
 
     for (int i = 0; i < m_roomOptions.size(); i++) {
       std::string name = m_dataManager.GetRoomName(m_roomOptions[i]);
       if (i == choice) {
-        m_console.Print(1, 4 + i, "> " + name);
+        m_console.Print(2, 4 + i, "> " + name);
       } else {
-        m_console.Print(1, 4 + i, "  " + name);
+        m_console.Print(2, 4 + i, "  " + name);
       }
     }
 
-    m_console.Print(0, 11, m_dataManager.GetString("continueEnter"));
+    /*m_console.Print(1, 11, m_dataManager.GetString("continueEnter"));*/
     int key = m_console.GetKey();
 
     if (key == 224) {
@@ -131,7 +132,7 @@ void Game::EnterRoom(RoomType type) {
       room = new ShopRoom(&m_dataManager, &m_console, this);
       break;
     case RoomType::MONSTER:
-        room = new MonsterRoom(this);
+      room = new MonsterRoom(this);
       break;
     case RoomType::ELITE:
       room = new EliteRoom(this);
@@ -145,22 +146,25 @@ void Game::EnterRoom(RoomType type) {
     room->SetDescription(m_dataManager.GetRoomDescription(type));
 
     m_console.ClearScreen();
-    HUD(80);
+    HUD(60);
 
-    // Ð”Ð»Ñ ShopRoom Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ Ð²Ð½ÑƒÑ‚Ñ€Ð¸ ÑÐ°Ð¼Ð¾Ð¹ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñ‹
     if (type != RoomType::SHOP) {
-      m_console.Print(0, 1, room->GetDescription());
+      m_console.Print(1, 1, room->GetDescription());
     }
 
     room->OnEnter(m_player);
 
     if (type == RoomType::SHOP) {
       m_console.ClearScreen();
-      HUD(80);
+      HUD(60);
     }
 
-    m_console.Print(0, 3, room->GetResultText());
-    m_console.Print(0, 11, m_dataManager.GetString("continue"));
+    int total_x = 1;
+    /*m_console.Print(total_x, 1, m_dataManager.GetString("separator"));*/
+    m_console.Print(total_x, 1, m_dataManager.GetString("total"));
+    m_console.Print(total_x, 2, room->GetResultText());
+    /*m_console.Print(total_x, 4, m_dataManager.GetString("separator"));*/
+    /*m_console.Print(total_x, 11, m_dataManager.GetString("continue"));*/
     m_console.GetKey();
 
     delete room;
@@ -169,12 +173,10 @@ void Game::EnterRoom(RoomType type) {
 }
 
 void Game::HUD(int x) {
-  // ÐšÐ»Ð°ÑÑ Ð¸Ð³Ñ€Ð¾ÐºÐ°
   m_console.Print(
       x, 1,
       m_dataManager.GetString("your_class") + " " + m_player->GetClassName());
 
-  // Õàðàêòåðèñòèêè
   m_console.Print(x, 2,
                   m_dataManager.GetString("hp_label") +
                       std::to_string(m_player->GetCurrentHP()) + " / " +
@@ -194,29 +196,25 @@ void Game::HUD(int x) {
                   m_dataManager.GetString("gld_label") +
                       std::to_string(m_player->GetGold()));
 
-  // Ðàçäåëèòåëü
-  m_console.Print(x, 6, "--------------------------");
+  m_console.Print(x, 6, m_dataManager.GetString("separator"));
 
-  // Ñïîñîáíîñòè
   auto spells = m_dataManager.GetClassSpells(m_player->GetClassName());
-  std::string spellsText = "Ñïîñîáíîñòè: ";
+  std::string spellsText = m_dataManager.GetString("spells_label");
   for (size_t i = 0; i < spells.size(); i++) {
     spellsText += spells[i];
     if (i < spells.size() - 1) spellsText += ", ";
   }
   m_console.Print(x, 7, spellsText);
 
-  // Àðòåôàêòû
-  std::string artifactsTitle = "Àðòåôàêòû: ";
+  std::string artifactsTitle = m_dataManager.GetString("artifacts_label");
   auto& inventory = m_player->GetInventory();
 
   if (inventory.empty()) {
     m_console.Print(x, 8, artifactsTitle);
-    m_console.Print(x, 9, "--------------------------");
+    m_console.Print(x, 9, m_dataManager.GetString("separator"));
   } else {
     m_console.Print(x, 8, artifactsTitle);
 
-    // Êàæäûé àðòåôàêò íà íîâîé ñòðîêå
     int line = 9;
     for (size_t i = 0; i < inventory.size(); i++) {
       std::string name = m_dataManager.GetArtifactName(inventory[i]);
@@ -224,7 +222,6 @@ void Game::HUD(int x) {
       line++;
     }
 
-    // Ðàçäåëèòåëü ïîñëå ïîñëåäíåãî àðòåôàêòà
-    m_console.Print(x, line, "--------------------------");
+    m_console.Print(x, line, m_dataManager.GetString("separator"));
   }
 }

@@ -51,7 +51,7 @@
   },
   "trial_amulet": {
     "name": "Амулет испытаний",
-    "description": " +10 ATK по элитным монстрам и боссу",
+    "description": " +10 ATK по всем, кроме обычных монстров",
     "price": 250
   },
   "ancient_tome": {
@@ -81,7 +81,7 @@
   },
   "perfection_armor": {
     "name": "Доспех безупречности",
-    "description": " При прохождении боя с макс. HP, повышает HP, MP, ATK, SPD, INT на 3",
+    "description": " Прохождение боя с макс. HP повышает все статы на 3",
     "price": 400
   },
   "revival_amulet": {
