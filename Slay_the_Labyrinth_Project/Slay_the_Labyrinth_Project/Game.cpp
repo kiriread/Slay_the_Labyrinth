@@ -5,6 +5,7 @@ Game::Game() : m_isRunning(false), m_player(nullptr) {
   m_dataManager.LoadRooms("assets/json/rooms.json");
   m_dataManager.LoadStrings("assets/json/strings.json");
   m_dataManager.LoadArtifacts("assets/json/artifacts.json");
+  m_dataManager.LoadSpells("assets/json/spells.json");
   m_currentCount = 1;
 }
 
@@ -12,11 +13,9 @@ Game::~Game() { delete m_player; }
 
 void Game::Run() {
   MainMenu();
-  /*YourChoice();*/
 
   while (m_isRunning) {
-    int key = m_console.GetKey();
-    /*ProcessInput(key);*/
+    m_console.WaitForEnter();
     RoomChoice();
   }
 }
@@ -70,8 +69,8 @@ void Game::MainMenu() {
   // Create the player based on selected class
   std::string classId = ids[choice];
   Stats stats = m_dataManager.GetClassStats(classId);
-  std::string name = m_dataManager.GetClassNamee(classId);
-  m_player = new Player(name, stats);
+  std::string className = m_dataManager.GetClassNamee(classId);
+  m_player = new Player(classId, className, stats);
   m_isRunning = true;
 }
 
@@ -126,7 +125,7 @@ void Game::EnterRoom(RoomType type) {
 
   switch (type) {
     case RoomType::REST:
-      room = new RestRoom();
+      room = new RestRoom(&m_dataManager, &m_console, this);
       break;
     case RoomType::SHOP:
       room = new ShopRoom(&m_dataManager, &m_console, this);
@@ -145,26 +144,24 @@ void Game::EnterRoom(RoomType type) {
   if (room != nullptr) {
     room->SetDescription(m_dataManager.GetRoomDescription(type));
 
+    if (type != RoomType::SHOP) {
+      // Обычные комнаты: описание, клавиша, результат
+      m_console.ClearScreen();
+      HUD(60);
+      m_console.Print(1, 1, room->GetDescription());
+      m_console.WaitForEnter();
+    }
+
+    // Действие комнаты
+    room->OnEnter(m_player);
+
+    // Второй экран: результат (для всех)
     m_console.ClearScreen();
     HUD(60);
 
-    if (type != RoomType::SHOP) {
-      m_console.Print(1, 1, room->GetDescription());
-    }
-
-    room->OnEnter(m_player);
-
-    if (type == RoomType::SHOP) {
-      m_console.ClearScreen();
-      HUD(60);
-    }
-
     int total_x = 1;
-    /*m_console.Print(total_x, 1, m_dataManager.GetString("separator"));*/
     m_console.Print(total_x, 1, m_dataManager.GetString("total"));
     m_console.Print(total_x, 2, room->GetResultText());
-    /*m_console.Print(total_x, 4, m_dataManager.GetString("separator"));*/
-    /*m_console.Print(total_x, 11, m_dataManager.GetString("continue"));*/
     m_console.GetKey();
 
     delete room;
@@ -198,24 +195,29 @@ void Game::HUD(int x) {
 
   m_console.Print(x, 6, m_dataManager.GetString("separator"));
 
-  auto spells = m_dataManager.GetClassSpells(m_player->GetClassName());
-  std::string spellsText = m_dataManager.GetString("spells_label");
+  // Заклинания
+  auto spells = m_dataManager.GetClassSpells(m_player->GetClassId());
+  m_console.Print(x, 7, m_dataManager.GetString("spells_label"));
+
+  int line = 8;
   for (size_t i = 0; i < spells.size(); i++) {
-    spellsText += spells[i];
-    if (i < spells.size() - 1) spellsText += ", ";
+    std::string spellName = m_dataManager.GetSpellName(spells[i]);
+    int mana = m_dataManager.GetSpellMana(spells[i]);
+    m_console.Print(x, line,
+                    "  " + spellName + " - " + std::to_string(mana) + " MP");
+    line++;
   }
-  m_console.Print(x, 7, spellsText);
 
   std::string artifactsTitle = m_dataManager.GetString("artifacts_label");
   auto& inventory = m_player->GetInventory();
 
   if (inventory.empty()) {
-    m_console.Print(x, 8, artifactsTitle);
-    m_console.Print(x, 9, m_dataManager.GetString("separator"));
+    m_console.Print(x, 11, artifactsTitle);
+    m_console.Print(x, 12, m_dataManager.GetString("separator"));
   } else {
-    m_console.Print(x, 8, artifactsTitle);
+    m_console.Print(x, 11, artifactsTitle);
 
-    int line = 9;
+    int line = 12;
     for (size_t i = 0; i < inventory.size(); i++) {
       std::string name = m_dataManager.GetArtifactName(inventory[i]);
       m_console.Print(x, line, "  " + name);

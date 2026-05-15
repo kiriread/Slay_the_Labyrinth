@@ -177,3 +177,23 @@ std::vector<std::string> DataManager::GetRandomArtifactIds(int count) const {
     }
     return std::vector<std::string>(ids.begin(), ids.begin() + resultSize);
 }
+
+void DataManager::LoadSpells(const std::string& filepath) {
+    std::ifstream file(filepath);
+    if (!file.is_open()) {
+        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
+        return;
+    }
+    file >> m_spellsData;
+    file.close();
+}
+
+std::string DataManager::GetSpellName(const std::string& id) const {
+    if (!m_spellsData.contains(id)) return "Неизвестно";
+    return UTF8to1251(m_spellsData[id]["name"]);
+}
+
+int DataManager::GetSpellMana(const std::string& id) const {
+    if (!m_spellsData.contains(id)) return 0;
+    return m_spellsData[id]["mana"];
+}

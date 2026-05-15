@@ -42,7 +42,7 @@ void ShopRoom::OnEnter(Player* player) {
     }
 
     if (!message.empty()) {
-      m_console->Print(1, 13, message);
+      m_console->Print(1, 14, message);
     }
 
     /*m_console->Print(1, 14, m_dataManager->GetString("shopContinue"));*/

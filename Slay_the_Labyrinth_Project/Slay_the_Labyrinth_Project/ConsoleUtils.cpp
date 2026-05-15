@@ -16,3 +16,10 @@ void ConsoleUtils::Print(int x, int y, const std::string& text) {
 int ConsoleUtils::GetKey() {
     return _getch();
 }
+
+void ConsoleUtils::WaitForEnter() {
+    while (true) {
+        int key = _getch();
+        if (key == 13) break;  // Enter
+    }
+}

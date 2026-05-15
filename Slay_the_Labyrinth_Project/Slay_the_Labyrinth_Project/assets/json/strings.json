@@ -10,7 +10,7 @@
   "spd_label": "SPD: ",
   "int_label": "INT: ",
   "gld_label": "GLD: ",
-  "spells_label": "Способности: ",
+  "spells_label": "Заклинания: ",
   "artifacts_label": "Артефакты: ",
 
   "count_label": "Комната:",
@@ -22,6 +22,11 @@
   "shopContinue": "(Переключение стрелками ввер-вниз; Enter — купить; ESC — выйти)",
   "separator": "--------------------------",
   "total": "Итог:",
+
+  "restored": "Восстановлено ", 
+  "hp_and": " HP и ",
+  "mp.": " MP.",
+
 
   "shop_title": "Товары:",
   "shop_not_enough_gold": "Недостаточно золота!",
