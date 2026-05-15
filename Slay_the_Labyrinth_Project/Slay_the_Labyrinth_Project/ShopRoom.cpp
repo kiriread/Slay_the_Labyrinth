@@ -10,7 +10,25 @@ ShopRoom::ShopRoom(DataManager* dm, ConsoleUtils* console, Game* game)
       m_game(game) {}
 
 void ShopRoom::OnEnter(Player* player) {
-  m_stock = m_dataManager->GetRandomArtifactIds(3);
+  m_stock =
+      m_dataManager->GetRandomArtifactIdsExcluding(3, player->GetInventory());
+
+  // Если ВСЕ артефакты уже собраны — показать сообщение и ждать ESC
+  if (m_stock.empty()) {
+    while (true) {
+      m_console->ClearScreen();
+      m_game->HUD(70);
+      m_console->Print(1, 1, m_dataManager->GetString("alt_description"));
+      m_console->Print(1, 2, m_dataManager->GetString("shop_empty"));
+
+      int key = m_console->GetKey();
+      if (key == 27 or key == 13) {
+        m_resultText = m_dataManager->GetString("shop_leave");
+        return;
+      }
+    }
+  }
+
   int choice = 0;
   std::string message = "";
 
@@ -24,10 +42,15 @@ void ShopRoom::OnEnter(Player* player) {
     m_console->Print(1, 1, m_description);
     m_console->Print(1, 3, m_dataManager->GetString("shop_title"));
 
+    // Товары
     for (int i = 0; i < (int)m_stock.size(); i++) {
       std::string name = m_dataManager->GetArtifactName(m_stock[i]);
       std::string desc = m_dataManager->GetArtifactDescription(m_stock[i]);
       int price = m_dataManager->GetArtifactPrice(m_stock[i]);
+
+      if (player->HasArtifact("discount_coupon")) {
+        price = price / 2;
+      }
 
       std::string line;
       if (i == choice)
@@ -45,8 +68,6 @@ void ShopRoom::OnEnter(Player* player) {
       m_console->Print(1, 14, message);
     }
 
-    /*m_console->Print(1, 14, m_dataManager->GetString("shopContinue"));*/
-
     int key = m_console->GetKey();
 
     if (key == 224) {
@@ -63,6 +84,11 @@ void ShopRoom::OnEnter(Player* player) {
 
     if (key == 13) {
       int price = m_dataManager->GetArtifactPrice(m_stock[choice]);
+
+      if (player->HasArtifact("discount_coupon")) {
+        price = price / 2;
+      }
+
       if (player->SpendGold(price)) {
         player->AddArtifact(m_stock[choice]);
         message = m_dataManager->GetString("shop_purchased") +
@@ -79,7 +105,7 @@ void ShopRoom::OnEnter(Player* player) {
     }
   }
 
-  if (m_stock.empty() and m_resultText.empty()) {
+  if (m_stock.empty() && m_resultText.empty()) {
     m_resultText = m_dataManager->GetString("shop_all_buyed");
   }
 }

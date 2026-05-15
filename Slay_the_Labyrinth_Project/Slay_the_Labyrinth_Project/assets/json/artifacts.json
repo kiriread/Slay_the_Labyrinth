@@ -6,12 +6,12 @@
   },
   "sleep_pillow": {
     "name": "Подушка для сна",
-    "description": " Место под ночлег восстанавливает на 15 HP больше",
+    "description": " Место под ночлег восстанавливает на 10 HP больше",
     "price": 120
   },
   "sleep_blanket": {
     "name": "Одеяло для сна",
-    "description": " Место под ночлег восстанавливает на 15 MP больше",
+    "description": " Место под ночлег восстанавливает на 20 MP больше",
     "price": 120
   },
   "speed_boots": {
@@ -71,12 +71,12 @@
   },
   "sleeping_pill": {
     "name": "Снотворное",
-    "description": " Место под ночлег дает +5 HP",
+    "description": " Место под ночлег дает +5 к макс. HP",
     "price": 100
   },
   "humidifier": {
     "name": "Увлажнитель",
-    "description": " Место под ночлег дает +5 MP",
+    "description": " Место под ночлег дает +15 к макс. MP",
     "price": 100
   },
   "perfection_armor": {
