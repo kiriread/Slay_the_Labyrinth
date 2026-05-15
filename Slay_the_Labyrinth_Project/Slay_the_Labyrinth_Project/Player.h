@@ -10,7 +10,7 @@ class Player {
   std::string m_className;
   std::string m_classId;
   Stats m_stats;
-  int m_gold = 1000;
+  int m_gold = 0;
   std::vector<std::string> m_inventory;
 
  public:
@@ -29,10 +29,14 @@ class Player {
 
   void RestoreHP(int amount);
   void RestoreMP(int aomount);
+  void AddMaxHP(int amount);
+  void AddMaxMP(int amount);
 
   int GetGold() const;
   void AddGold(int amount);
   bool SpendGold(int amount);
   void AddArtifact(const std::string& id);
   const std::vector<std::string>& GetInventory() const;
+  int GetGoldMultiplier() const;
+  bool HasArtifact(const std::string& id) const;
 };

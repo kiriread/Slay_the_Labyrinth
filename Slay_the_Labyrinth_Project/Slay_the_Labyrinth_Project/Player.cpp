@@ -38,20 +38,61 @@ void Player::AddArtifact(const std::string& id) {
   m_inventory.push_back(id);
 
   // —таты
-  if (id == "whetstone") m_stats.BonusATK += 5;
-  if (id == "speed_boots") m_stats.BonusSPD += 5;
-  if (id == "banana") m_stats.BonusMaxHP += 10;
-  if (id == "pear") m_stats.BonusMaxHP += 5;
-  if (id == "ancient_tome") m_stats.BonusINT += 5;
-  if (id == "magic_stone") m_stats.BonusMaxMP += 15;
-  if (id == "magic_boulder") m_stats.BonusMaxMP += 25;
+  if (id == "whetstone") {
+    m_stats.BonusATK += 5;
+  }
+  if (id == "speed_boots") {
+    m_stats.BonusSPD += 5;
+  }
+  if (id == "banana") {
+    m_stats.BonusMaxHP += 10;
+    m_stats.CurrentHP += 10;
+  }
+  if (id == "pear") {
+    m_stats.BonusMaxHP += 5;
+    m_stats.CurrentHP += 5;
+  }
+  if (id == "ancient_tome") {
+    m_stats.BonusINT += 5;
+  }
+  if (id == "magic_stone") {
+    m_stats.BonusMaxMP += 15;
+    m_stats.CurrentMP += 15;
+  }
+  if (id == "magic_boulder") {
+    m_stats.BonusMaxMP += 25;
+    m_stats.CurrentMP += 25;
+  }
   if (id == "berserk_talisman") {
     m_stats.BonusATK += 3;
     m_stats.BonusSPD += 3;
   }
 
   // ѕассивные (не статы) Ч healing_sprout, diadem, sleep_pillow, sleep_blanket,
-  // sleeping_pill, humidifier, clover_petal, discount_coupon, trial_amulet,
-  // perfection_armor, revival_amulet
-  // Ёти эффекты провер€ютс€ в других местах
+  // clover_petal, discount_coupon, trial_amulet, perfection_armor,
+  // revival_amulet Ёти эффекты провер€ютс€ в других местах
+}
+
+int Player::GetGoldMultiplier() const {
+  for (auto& id : m_inventory) {
+    if (id == "clover_petal") return 120;
+  }
+  return 100;
+}
+
+bool Player::HasArtifact(const std::string& id) const {
+  for (auto& a : m_inventory) {
+    if (a == id) return true;
+  }
+  return false;
+}
+
+void Player::AddMaxHP(int amount) {
+    m_stats.BonusMaxHP += amount;
+    m_stats.CurrentHP += amount;
+}
+
+void Player::AddMaxMP(int amount) {
+    m_stats.BonusMaxMP += amount;
+    m_stats.CurrentMP += amount;
 }

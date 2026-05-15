@@ -153,31 +153,6 @@ int DataManager::GetArtifactPrice(const std::string& id) const {
     return m_artifactsData[id]["price"];
 }
 
-// Получить список случайных ID артефактов
-std::vector<std::string> DataManager::GetRandomArtifactIds(int count) const {
-    std::vector<std::string> ids;
-
-    // Собрать все ключи (ID артефактов) из JSON
-    for (auto& item : m_artifactsData.items()) {
-        ids.push_back(item.key());
-    }
-
-    // Перемешать случайным образом
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(ids.begin(), ids.end(), g);
-
-    // Вернуть первые count штук (или сколько есть)
-    int resultSize;
-    if (count < (int)ids.size()) {
-        resultSize = count;
-    }
-    else {
-        resultSize = (int)ids.size();
-    }
-    return std::vector<std::string>(ids.begin(), ids.begin() + resultSize);
-}
-
 void DataManager::LoadSpells(const std::string& filepath) {
     std::ifstream file(filepath);
     if (!file.is_open()) {
@@ -196,4 +171,34 @@ std::string DataManager::GetSpellName(const std::string& id) const {
 int DataManager::GetSpellMana(const std::string& id) const {
     if (!m_spellsData.contains(id)) return 0;
     return m_spellsData[id]["mana"];
+}
+
+std::vector<std::string> DataManager::GetRandomArtifactIdsExcluding(int count, const std::vector<std::string>& exclude) const {
+    std::vector<std::string> ids;
+
+    // Собрать все ID, кроме уже имеющихся
+    for (auto& item : m_artifactsData.items()) {
+        std::string id = item.key();
+        bool isExcluded = false;
+        for (auto& ex : exclude) {
+            if (id == ex) {
+                isExcluded = true;
+                break;
+            }
+        }
+        if (!isExcluded) {
+            ids.push_back(id);
+        }
+    }
+
+    // Если доступных меньше чем count — вернуть сколько есть
+    if (ids.empty()) return {};
+
+    // Перемешать
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(ids.begin(), ids.end(), g);
+
+    int resultSize = (count < (int)ids.size()) ? count : (int)ids.size();
+    return std::vector<std::string>(ids.begin(), ids.begin() + resultSize);
 }

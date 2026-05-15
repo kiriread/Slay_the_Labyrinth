@@ -38,10 +38,13 @@ class DataManager {
   std::string GetArtifactName(const std::string& id) const;
   std::string GetArtifactDescription(const std::string& id) const;
   int GetArtifactPrice(const std::string& id) const;
-  std::vector<std::string> GetRandomArtifactIds(int count) const;
 
   // Заклинания
   void LoadSpells(const std::string& filepath);
   std::string GetSpellName(const std::string& id) const;
   int GetSpellMana(const std::string& id) const;
+
+  // Анти повтор артефактов
+  std::vector<std::string> GetRandomArtifactIdsExcluding(
+      int count, const std::vector<std::string>& exclude) const;
 };
