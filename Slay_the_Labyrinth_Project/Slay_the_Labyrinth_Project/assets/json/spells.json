@@ -1,0 +1,11 @@
+{
+  "rage":                { "name": "Ярость",               "mana": 30 },
+  "sweeping_strike":     { "name": "Размашистый удар",      "mana": 20 },
+  "regeneration_potion": { "name": "Зелье регенерации",     "mana": 30 },
+  "backstab":            { "name": "Удар в спину",          "mana": 18 },
+  "speed_potion":        { "name": "Зелье скорости",        "mana": 30 },
+  "dust_in_eyes":        { "name": "Пыль в глаза",          "mana": 30 },
+  "fireball":            { "name": "Огненный шар",          "mana": 30 },
+  "frost_vortex":        { "name": "Морозный вихрь",        "mana": 30 },
+  "healing":             { "name": "Исцеление",             "mana": 20 }
+}

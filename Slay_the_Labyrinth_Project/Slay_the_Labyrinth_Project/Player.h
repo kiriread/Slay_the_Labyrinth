@@ -8,12 +8,13 @@
 class Player {
  private:
   std::string m_className;
+  std::string m_classId;
   Stats m_stats;
   int m_gold = 1000;
   std::vector<std::string> m_inventory;
 
  public:
-  Player(std::string className, Stats stats);
+  Player(std::string classId, std::string className, Stats stats);
 
   // more Getters
   std::string GetClassName() const { return m_className; }
@@ -24,6 +25,7 @@ class Player {
   int GetATK() const { return m_stats.GetTotalATK(); }
   int GetSPD() const { return m_stats.GetTotalSPD(); }
   int GetINT() const { return m_stats.GetTotalINT(); }
+  std::string GetClassId() const { return m_classId; }
 
   void RestoreHP(int amount);
   void RestoreMP(int aomount);

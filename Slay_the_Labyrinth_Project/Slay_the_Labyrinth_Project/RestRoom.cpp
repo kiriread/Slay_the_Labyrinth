@@ -1,8 +1,13 @@
 #include "RestRoom.h"
 
+#include "Game.h"
 #include "Player.h"
 
-RestRoom::RestRoom() : Room(RoomType::REST) {}
+RestRoom::RestRoom(DataManager* dm, ConsoleUtils* console, Game* game)
+    : Room(RoomType::REST),
+      m_dataManager(dm),
+      m_console(console),
+      m_game(game) {}
 
 void RestRoom::OnEnter(Player* player) {
   int hpRestored = (player->GetMaxHP() * 20) / 100;
@@ -11,7 +16,8 @@ void RestRoom::OnEnter(Player* player) {
   player->RestoreHP(hpRestored);
   player->RestoreMP(mpRestored);
 
-  m_resultText = "Восстановлено " + std::to_string(hpRestored) + " HP и " +
-                 std::to_string(mpRestored) + " MP.";
+  m_resultText = m_dataManager->GetString("restored") +
+                 std::to_string(hpRestored) +
+                 m_dataManager->GetString("hp_and") +
+                 std::to_string(mpRestored) + m_dataManager->GetString("mp.");
 }
-

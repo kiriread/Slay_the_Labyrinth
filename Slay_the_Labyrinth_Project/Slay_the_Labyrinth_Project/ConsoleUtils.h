@@ -6,4 +6,5 @@ class ConsoleUtils {
   void ClearScreen();
   void Print(int x, int y, const std::string& text);
   int GetKey();
+  void WaitForEnter();
 };
