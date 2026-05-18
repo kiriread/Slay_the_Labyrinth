@@ -146,6 +146,7 @@
     <ClCompile Include="RestRoom.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="ShopRoom.cpp" />
+    <ClCompile Include="Spell.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="WorldState.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="RestRoom.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="ShopRoom.h" />
+    <ClInclude Include="Spell.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="WorldState.h" />
   </ItemGroup>
