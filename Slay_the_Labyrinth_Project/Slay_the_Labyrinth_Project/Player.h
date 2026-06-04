@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include <vector>
@@ -31,6 +31,7 @@ class Player {
   void RestoreMP(int aomount);
   void AddMaxHP(int amount);
   void AddMaxMP(int amount);
+  void AddPerfectionStats();
 
   int GetGold() const;
   void AddGold(int amount);

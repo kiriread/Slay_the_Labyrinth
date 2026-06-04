@@ -1,4 +1,4 @@
-#include "Enemy.h"
+﻿#include "Enemy.h"
 
 Enemy::Enemy(std::string name, int hp, int atk, int spd) : m_name(name) {
   m_stats.MaxHP = hp;
@@ -22,5 +22,5 @@ std::vector<Enemy> EliteEnemy() {
 }
 
 std::vector<Enemy> Bosses() {
-  return {Enemy("Ð§ÑÑÐ½ÑÐ¹ Ð´ÑÐ°ÐºÐ¾Ð½", 90, 50, 50), Enemy("ÐÐµÐ¼Ð¾Ð½ ÐºÑÐ¾Ð²Ð¸", 70, 30, 80)};
+  return {Enemy("Чёрный дракон", 90, 20, 50), Enemy("Суккуб", 70, 30, 60)};
 }

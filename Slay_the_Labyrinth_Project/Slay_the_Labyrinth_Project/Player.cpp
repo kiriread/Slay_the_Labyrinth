@@ -1,4 +1,4 @@
-#include "Player.h"
+п»ї#include "Player.h"
 
 Player::Player(std::string classId, std::string className, Stats stats)
     : m_classId(classId), m_className(className), m_stats(stats) {
@@ -20,7 +20,7 @@ int Player::GetGold() const { return m_gold; }
 
 void Player::AddGold(int amount) { m_gold += amount; }
 
-// Потратить золото. Возвращает false, если не хватает
+// РџРѕС‚СЂР°С‚РёС‚СЊ Р·РѕР»РѕС‚Рѕ. Р’РѕР·РІСЂР°С‰Р°РµС‚ false, РµСЃР»Рё РЅРµ С…РІР°С‚Р°РµС‚
 bool Player::SpendGold(int amount) {
   if (m_gold < amount) {
     return false;
@@ -29,7 +29,7 @@ bool Player::SpendGold(int amount) {
   return true;
 }
 
-// Получить список ID артефактов (только для чтения)
+// РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє ID Р°СЂС‚РµС„Р°РєС‚РѕРІ (С‚РѕР»СЊРєРѕ РґР»СЏ С‡С‚РµРЅРёСЏ)
 const std::vector<std::string>& Player::GetInventory() const {
   return m_inventory;
 }
@@ -37,7 +37,7 @@ const std::vector<std::string>& Player::GetInventory() const {
 void Player::AddArtifact(const std::string& id) {
   m_inventory.push_back(id);
 
-  // Статы
+  // РЎС‚Р°С‚С‹
   if (id == "whetstone") {
     m_stats.BonusATK += 5;
   }
@@ -68,9 +68,9 @@ void Player::AddArtifact(const std::string& id) {
     m_stats.BonusSPD += 3;
   }
 
-  // Пассивные (не статы) — healing_sprout, diadem, sleep_pillow, sleep_blanket,
+  // РџР°СЃСЃРёРІРЅС‹Рµ (РЅРµ СЃС‚Р°С‚С‹) вЂ” healing_sprout, diadem, sleep_pillow, sleep_blanket,
   // clover_petal, discount_coupon, trial_amulet, perfection_armor,
-  // revival_amulet Эти эффекты проверяются в других местах
+  // revival_amulet Р­С‚Рё СЌС„С„РµРєС‚С‹ РїСЂРѕРІРµСЂСЏСЋС‚СЃСЏ РІ РґСЂСѓРіРёС… РјРµСЃС‚Р°С…
 }
 
 int Player::GetGoldMultiplier() const {
@@ -95,4 +95,10 @@ void Player::AddMaxHP(int amount) {
 void Player::AddMaxMP(int amount) {
     m_stats.BonusMaxMP += amount;
     m_stats.CurrentMP += amount;
+}
+
+void Player::AddPerfectionStats() {
+    m_stats.BonusATK += 3;
+    m_stats.BonusINT += 3;
+    m_stats.BonusSPD += 3;
 }

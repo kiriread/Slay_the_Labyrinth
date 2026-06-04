@@ -16,11 +16,15 @@ BattleManager::BattleManager(Player* player, Game* game)
     , m_console()
     , m_totalATK(m_player->GetATK())
     , m_totalSPD(m_player->GetSPD())
+    , m_totalEnemyATK(0)
+    , m_totalEnemySPD(0)
     , m_rage_dur(0)
     , m_regen_dur(0)
     , m_spdPotion_dur(0)
     , m_dusk_dur(0)
     , m_frost_dur(0)
+    , m_bossSkillCD(0)
+    , m_fightType()
 {
 }
 
@@ -31,6 +35,10 @@ BattleManager::~BattleManager() {
 void BattleManager::StartBattle(RoomType room) {
     EnemyCreator enemyCreator;
     m_enemy = enemyCreator.OnEnterB(room);
+    m_fightType = room;
+    if (room != RoomType::MONSTER && m_player->HasArtifact("trial_amulet")) {
+        m_totalATK += 10;
+    }
     m_spells = m_sp.GetSpells(m_player->GetClassName());
 
     m_pInitiative = 0;
@@ -48,10 +56,21 @@ void BattleManager::StartBattle(RoomType room) {
         }
 
         if (m_enemy->GetCurrentHP() <= 0) {
+            if (m_player->GetCurrentHP() == m_player->GetMaxHP()) {
+                m_player->AddPerfectionStats();
+            }
             break;
         }
         if (m_player->GetCurrentHP() <= 0) {
-            break;
+            if (m_player->HasArtifact("revival_amulet")) {
+                m_player->RestoreHP(m_player->GetMaxHP() * 0.3);
+            }
+            else {
+                m_console.ClearScreen();
+                m_console.Print(0, 0, "Вы проиграли!");
+                int key = m_console.GetKey();
+                std::exit(0);
+            }
         }
     }
 }
@@ -90,6 +109,9 @@ void BattleManager::PlayerTurn() {
         if (m_spdPotion_dur == 0) {
             m_totalSPD /= 2;
         }
+    }
+    if (m_player->HasArtifact("healing_sprout")) {
+        m_player->RestoreHP(5);
     }
     m_console.ClearScreen();
     m_game->HUD(0);
@@ -149,20 +171,89 @@ void BattleManager::EnemyTurn() {
             m_totalEnemySPD *= 2;
         }
     }
-    m_console.ClearScreen();
-    m_game->HUD(0);
-    EnemyHUD();
-    m_console.Print(0, 0, "Ход врага:");
-    int key = m_console.GetKey();
+    if (m_enemy->GetName() == "Чёрный дракон") {
+        if (m_bossSkillCD == 0) {
+            m_console.ClearScreen();
+            m_game->HUD(0);
+            EnemyHUD();
+            m_console.Print(0, 0, "Ход врага:");
+            int key = m_console.GetKey();
+            DragonCry();
+            m_console.ClearScreen();
+            m_game->HUD(0);
+            EnemyHUD();
+            m_console.Print(0, 0, "Дракон кричит, усиливая себя:");
+            key = m_console.GetKey();
+        }
+        else {
+            m_bossSkillCD -= 1;
+            m_console.ClearScreen();
+            m_game->HUD(0);
+            EnemyHUD();
+            m_console.Print(80, 6, "Перезарядка умения: " + std::to_string(m_bossSkillCD));
+            m_console.Print(0, 0, "Ход врага:");
+            int key = m_console.GetKey();
 
-    int damage = m_enemy->GetATK();
-    m_player->RestoreHP(-damage);
-    
-    m_console.ClearScreen();
-    m_game->HUD(0);
-    EnemyHUD();
-    m_console.Print(0, 0, "Враг атаковал:");
-    key = m_console.GetKey();
+            int damage = m_enemy->GetATK();
+            m_player->RestoreHP(-damage);
+
+            m_console.ClearScreen();
+            m_game->HUD(0);
+            EnemyHUD();
+            m_console.Print(80, 6, "Перезарядка умения: " + std::to_string(m_bossSkillCD));
+            m_console.Print(0, 0, "Враг атаковал:");
+            key = m_console.GetKey();
+        }
+    }
+    else if (m_enemy->GetName() == "Суккуб") {
+        if (m_bossSkillCD == 0) {
+            m_console.ClearScreen();
+            m_game->HUD(0);
+            EnemyHUD();
+            m_console.Print(80, 6, "Перезарядка умения: " + std::to_string(m_bossSkillCD));
+            m_console.Print(0, 0, "Ход врага:");
+            int key = m_console.GetKey();
+            LifeSteal();
+            m_console.ClearScreen();
+            m_game->HUD(0);
+            EnemyHUD();
+            m_console.Print(0, 0, "Суккуб вытягивает из вас жизненные силы:");
+            key = m_console.GetKey();
+        }
+        else {
+            m_bossSkillCD -= 1;
+            m_console.ClearScreen();
+            m_game->HUD(0);
+            EnemyHUD();
+            m_console.Print(0, 0, "Ход врага:");
+            int key = m_console.GetKey();
+
+            int damage = m_enemy->GetATK();
+            m_player->RestoreHP(-damage);
+
+            m_console.ClearScreen();
+            m_game->HUD(0);
+            EnemyHUD();
+            m_console.Print(80, 6, "Перезарядка умения: " + std::to_string(m_bossSkillCD));
+            m_console.Print(0, 0, "Враг атаковал:");
+            key = m_console.GetKey();
+        }
+    }
+    else {
+        m_console.ClearScreen();
+        m_game->HUD(0);
+        EnemyHUD();
+        m_console.Print(0, 0, "Ход врага:");
+        int key = m_console.GetKey();
+
+        int damage = m_enemy->GetATK();
+        m_player->RestoreHP(-damage);
+        m_console.ClearScreen();
+        m_game->HUD(0);
+        EnemyHUD();
+        m_console.Print(0, 0, "Враг атаковал:");
+        key = m_console.GetKey();
+    }
 }
 void BattleManager::EnemyHUD() {
     int x = 80;
@@ -275,4 +366,16 @@ void BattleManager::SpellChoice() {
     else {
         PlayerTurn();
     }
+}
+
+void BattleManager::DragonCry() {
+    m_totalEnemySPD *= 2;
+    m_totalEnemyATK *= 2;
+    m_bossSkillCD = 3;
+}
+
+void BattleManager::LifeSteal() {
+    m_player->RestoreHP(-40);
+    m_enemy->TakeDamage(-40);
+    m_bossSkillCD = 3;
 }
