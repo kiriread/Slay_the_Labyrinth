@@ -25,6 +25,8 @@ class BattleManager {
   int m_spdPotion_dur;
   int m_dusk_dur;
   int m_frost_dur;
+  int m_bossSkillCD;
+  RoomType m_fightType;
   std::vector<Spell> m_spells;
   DataManager m_dataManager;
   ConsoleUtils m_console;
@@ -38,5 +40,7 @@ class BattleManager {
   ~BattleManager();
   void StartBattle(RoomType room);
   void CalculateInitiative();
+  void DragonCry();
+  void LifeSteal();
   void EnemyHUD();
 };
