@@ -14,7 +14,7 @@ void Enemy::TakeDamage(int amount) {
 }
 
 std::vector<Enemy> RegularEnemy(DataManager& dataManager) {
-  return {Enemy(dataManager.GetString("skeleton"), 30, 20, 40), Enemy(dataManager.GetString("goblin"), 50, 15, 30),
+  return {Enemy(dataManager.GetString("goblin"), 30, 20, 40), Enemy(dataManager.GetString("skeleton"), 50, 15, 30),
           Enemy(dataManager.GetString("slime"), 60, 16, 20)};
 }
 
