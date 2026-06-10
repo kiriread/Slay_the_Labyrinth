@@ -31,7 +31,7 @@ public:
 	int Dust_in_eyes(Enemy* enemy);
 	int Fireball(int intell);
 	int Frost_vortex(Enemy* enemy);
-	int Healing();
+	int Healing(int intell);
 
 	std::vector<Spell> WarriorSpells();
 	std::vector<Spell> RogueSpells();

@@ -46,7 +46,7 @@ int Spell::Sweeping_strike(int intell) {
 	return 20 + (intell / 2);
 }
 int Spell::Regeneration_potion() {
-	return 0;
+	return 15;
 }
 int Spell::Backstab(int intell) {
 	return 15 + (intell / 2);
@@ -63,6 +63,6 @@ int Spell::Fireball(int intell){
 int Spell::Frost_vortex(Enemy* enemy) {
 	return { enemy->GetSPD() / 2};
 }
-int Spell::Healing() {
-	return 15;
+int Spell::Healing(int intell) {
+	return 15 + (intell / 2);
 }
