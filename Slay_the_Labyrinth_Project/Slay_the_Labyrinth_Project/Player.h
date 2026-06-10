@@ -33,6 +33,8 @@ class Player {
   void AddMaxMP(int amount);
   void AddPerfectionStats();
   void DelAmulet();
+  void ChangeBonusATKSP(int amount, bool isActivate, bool isElst, bool isElen);
+  void ChangeBonusSPDSP(int amount, bool isActivate);
 
   int GetGold() const;
   void AddGold(int amount);

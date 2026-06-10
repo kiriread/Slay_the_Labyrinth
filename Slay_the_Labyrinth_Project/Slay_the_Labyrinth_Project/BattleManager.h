@@ -16,8 +16,6 @@ class BattleManager {
   int m_pInitiative;
   int m_eInitiative;
   bool m_isPlayerTurn;
-  int m_totalATK;
-  int m_totalSPD;
   int m_totalEnemyATK;
   int m_totalEnemySPD;
   int m_rage_dur;
