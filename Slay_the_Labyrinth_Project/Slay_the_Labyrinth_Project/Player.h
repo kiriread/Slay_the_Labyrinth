@@ -32,6 +32,7 @@ class Player {
   void AddMaxHP(int amount);
   void AddMaxMP(int amount);
   void AddPerfectionStats();
+  void DelAmulet();
 
   int GetGold() const;
   void AddGold(int amount);
