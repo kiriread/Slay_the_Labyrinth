@@ -1,20 +1,19 @@
-#include "RestRoom.h"
+ï»¿#include "RestRoom.h"
 
 #include "Game.h"
 #include "Player.h"
 #include "Stats.h"
 
-RestRoom::RestRoom(DataManager* dm, ConsoleUtils* console, Game* game)
+RestRoom::RestRoom(DataManager* dm, Game* game)
     : Room(RoomType::REST),
       m_dataManager(dm),
-      m_console(console),
       m_game(game) {}
 
 void RestRoom::OnEnter(Player* player) {
   int bonusMaxHP = 0;
   int bonusMaxMP = 0;
 
-  // Áîíóñ ê ìàêñèìóìó ïðè íî÷ëåãå (ñíîòâîðíîå, óâëàæíèòåëü)
+  // Ð‘Ð¾Ð½ÑƒÑ Ðº Ð¼Ð°ÐºÑÐ¸Ð¼ÑƒÐ¼Ñƒ Ð¿Ñ€Ð¸ Ð½Ð¾Ñ‡Ð»ÐµÐ³Ðµ (ÑÐ½Ð¾Ñ‚Ð²Ð¾Ñ€Ð½Ð¾Ðµ, ÑƒÐ²Ð»Ð°Ð¶Ð½Ð¸Ñ‚ÐµÐ»ÑŒ)
   if (player->HasArtifact("sleeping_pill")) {
     player->AddMaxHP(5);
     bonusMaxHP = 5;
@@ -24,11 +23,11 @@ void RestRoom::OnEnter(Player* player) {
     bonusMaxMP = 15;
   }
 
-  // Áàçîâîå âîññòàíîâëåíèå 20%
+  // Ð‘Ð°Ð·Ð¾Ð²Ð¾Ðµ Ð²Ð¾ÑÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ 20%
   int hpRestored = (player->GetMaxHP() * 20) / 100;
   int mpRestored = (player->GetMaxMP() * 20) / 100;
 
-  // Áîíóñû îò àðòåôàêòîâ (+ ôèêñèðîâàííûå çíà÷åíèÿ)
+  // Ð‘Ð¾Ð½ÑƒÑÑ‹ Ð¾Ñ‚ Ð°Ñ€Ñ‚ÐµÑ„Ð°ÐºÑ‚Ð¾Ð² (+ Ñ„Ð¸ÐºÑÐ¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ)
   if (player->HasArtifact("sleep_pillow")) hpRestored += 10;
   if (player->HasArtifact("sleep_blanket")) mpRestored += 20;
 

@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "Spell.h"
 
-BattleManager::BattleManager(Player* player, Game* game)
+BattleManager::BattleManager(Player* player, Game* game, DataManager* dm, ConsoleUtils* co)
     : m_player(player)
     , m_enemy(nullptr)
     , m_game(game)
@@ -12,8 +12,8 @@ BattleManager::BattleManager(Player* player, Game* game)
     , m_pInitiative(0)
     , m_eInitiative(0)
     , m_isPlayerTurn(true)
-    , m_dataManager()
-    , m_console()
+    , m_dataManager(dm)
+    , m_console(co)
     , m_totalATK(m_player->GetATK())
     , m_totalSPD(m_player->GetSPD())
     , m_totalEnemyATK(0)
@@ -26,7 +26,6 @@ BattleManager::BattleManager(Player* player, Game* game)
     , m_bossSkillCD(0)
     , m_fightType()
 {
-    m_dataManager.LoadStrings("assets/json/strings.json");
 }
 
 BattleManager::~BattleManager() {
@@ -48,7 +47,7 @@ void BattleManager::StartBattle(RoomType room) {
     m_eInitiative = 0;
 
     while (true) {
-        m_console.ClearScreen();
+        m_console->ClearScreen();
         CalculateInitiative();
 
         if (m_isPlayerTurn) {
@@ -72,9 +71,9 @@ void BattleManager::StartBattle(RoomType room) {
                 m_player->AddGold(600);
             }
             else {
-                m_console.ClearScreen();
-                m_console.Print(0, 0, m_dataManager.GetString("win"));
-                int key = m_console.GetKey();
+                m_console->ClearScreen();
+                m_console->Print(40, 2, m_dataManager->GetString("win"));
+                int key = m_console->GetKey();
                 std::exit(0);
             }
 
@@ -87,9 +86,9 @@ void BattleManager::StartBattle(RoomType room) {
                 m_player->DelAmulet();
             }
             else {
-                m_console.ClearScreen();
-                m_console.Print(0, 0, m_dataManager.GetString("lose"));
-                int key = m_console.GetKey();
+                m_console->ClearScreen();
+                m_console->Print(40, 2, m_dataManager->GetString("lose"));
+                int key = m_console->GetKey();
                 std::exit(0);
             }
         }
@@ -134,23 +133,23 @@ void BattleManager::PlayerTurn() {
     if (m_player->HasArtifact("healing_sprout")) {
         m_player->RestoreHP(5);
     }
-    m_console.ClearScreen();
+    m_console->ClearScreen();
     m_game->HUD(0);
-    m_console.Print(0, 0, m_dataManager.GetString("your_turn"));
+    m_console->Print(40, 2, m_dataManager->GetString("your_turn"));
     EnemyHUD();
     int choice = 0;
     while (true) {
         if (choice == 0) {
-            m_console.Print(2, 20, m_dataManager.GetString("sel_attack"));
-            m_console.Print(2, 21, m_dataManager.GetString("spell"));
+            m_console->Print(40, 6, m_dataManager->GetString("sel_attack"));
+            m_console->Print(40, 7, m_dataManager->GetString("spell"));
         }
         else {
-            m_console.Print(2, 20, m_dataManager.GetString("attack"));
-            m_console.Print(2, 21, m_dataManager.GetString("sel_spell"));
+            m_console->Print(40, 6, m_dataManager->GetString("attack"));
+            m_console->Print(40, 7, m_dataManager->GetString("sel_spell"));
         }
-        int key = m_console.GetKey();
+        int key = m_console->GetKey();
         if (key == 224) {
-            key = m_console.GetKey();
+            key = m_console->GetKey();
             if (key == 72) {
                 choice--;
                 if (choice < 0) choice = 1;
@@ -166,16 +165,16 @@ void BattleManager::PlayerTurn() {
     if (choice == 0)
         m_enemy->TakeDamage(damage);
     else {
-        m_console.ClearScreen();
+        m_console->ClearScreen();
         m_game->HUD(0);
-        m_console.Print(0, 0, m_dataManager.GetString("your_turn"));
+        m_console->Print(40, 2, m_dataManager->GetString("your_turn"));
         EnemyHUD();
         SpellChoice();
     }
-    m_console.ClearScreen();
+    m_console->ClearScreen();
     m_game->HUD(0);
     EnemyHUD();
-    m_console.Print(0, 0, m_dataManager.GetString("you_attacked"));
+    m_console->Print(40, 2, m_dataManager->GetString("you_attacked"));
 }
 
 void BattleManager::EnemyTurn() {
@@ -195,96 +194,96 @@ void BattleManager::EnemyTurn() {
         if (m_bossSkillCD == 0) {
             m_totalEnemyATK /= 2;
             m_totalEnemySPD /= 2;
-            m_console.ClearScreen();
+            m_console->ClearScreen();
             m_game->HUD(0);
             EnemyHUD();
-            m_console.Print(0, 0, m_dataManager.GetString("enemy_turn"));
-            int key = m_console.GetKey();
+            m_console->Print(40, 2, m_dataManager->GetString("enemy_turn"));
+            int key = m_console->GetKey();
             DragonCry();
-            m_console.ClearScreen();
+            m_console->ClearScreen();
             m_game->HUD(0);
             EnemyHUD();
-            m_console.Print(0, 0, m_dataManager.GetString("dragon_cry"));
-            key = m_console.GetKey();
+            m_console->Print(40, 2, m_dataManager->GetString("dragon_cry"));
+            key = m_console->GetKey();
         }
         else {
             m_bossSkillCD -= 1;
-            m_console.ClearScreen();
+            m_console->ClearScreen();
             m_game->HUD(0);
             EnemyHUD();
-            m_console.Print(80, 6, m_dataManager.GetString("spell_cd") + std::to_string(m_bossSkillCD));
-            m_console.Print(0, 0, m_dataManager.GetString("enemy_turn"));
-            int key = m_console.GetKey();
+            m_console->Print(80, 6, m_dataManager->GetString("spell_cd") + std::to_string(m_bossSkillCD));
+            m_console->Print(40, 2, m_dataManager->GetString("enemy_turn"));
+            int key = m_console->GetKey();
 
             int damage = m_totalEnemyATK;
             m_player->RestoreHP(-damage);
 
-            m_console.ClearScreen();
+            m_console->ClearScreen();
             m_game->HUD(0);
             EnemyHUD();
-            m_console.Print(80, 6, m_dataManager.GetString("spell_cd") + std::to_string(m_bossSkillCD));
-            m_console.Print(0, 0, m_dataManager.GetString("enemy_attacked"));
-            key = m_console.GetKey();
+            m_console->Print(80, 6, m_dataManager->GetString("spell_cd") + std::to_string(m_bossSkillCD));
+            m_console->Print(40, 2, m_dataManager->GetString("enemy_attacked"));
+            key = m_console->GetKey();
         }
     }
     else if (m_enemy->GetName() == "Суккуб") {
         if (m_bossSkillCD == 0) {
-            m_console.ClearScreen();
+            m_console->ClearScreen();
             m_game->HUD(0);
             EnemyHUD();
-            m_console.Print(80, 6, m_dataManager.GetString("spell_cd") + std::to_string(m_bossSkillCD));
-            m_console.Print(0, 0, m_dataManager.GetString("enemy_turn"));
-            int key = m_console.GetKey();
+            m_console->Print(80, 6, m_dataManager->GetString("spell_cd") + std::to_string(m_bossSkillCD));
+            m_console->Print(40, 2, m_dataManager->GetString("enemy_turn"));
+            int key = m_console->GetKey();
             LifeSteal();
-            m_console.ClearScreen();
+            m_console->ClearScreen();
             m_game->HUD(0);
             EnemyHUD();
-            m_console.Print(0, 0, m_dataManager.GetString("succub_drain"));
-            key = m_console.GetKey();
+            m_console->Print(40, 2, m_dataManager->GetString("succub_drain"));
+            key = m_console->GetKey();
         }
         else {
             m_bossSkillCD -= 1;
-            m_console.ClearScreen();
+            m_console->ClearScreen();
             m_game->HUD(0);
             EnemyHUD();
-            m_console.Print(0, 0, m_dataManager.GetString("enemy_turn"));
-            int key = m_console.GetKey();
+            m_console->Print(40, 2, m_dataManager->GetString("enemy_turn"));
+            int key = m_console->GetKey();
 
             int damage = m_totalEnemyATK;
             m_player->RestoreHP(-damage);
 
-            m_console.ClearScreen();
+            m_console->ClearScreen();
             m_game->HUD(0);
             EnemyHUD();
-            m_console.Print(80, 6, m_dataManager.GetString("spell_cd") + std::to_string(m_bossSkillCD));
-            m_console.Print(0, 0, m_dataManager.GetString("enemy_attacked"));
-            key = m_console.GetKey();
+            m_console->Print(80, 6, m_dataManager->GetString("spell_cd") + std::to_string(m_bossSkillCD));
+            m_console->Print(40, 2, m_dataManager->GetString("enemy_attacked"));
+            key = m_console->GetKey();
         }
     }
     else {
-        m_console.ClearScreen();
+        m_console->ClearScreen();
         m_game->HUD(0);
         EnemyHUD();
-        m_console.Print(0, 0, m_dataManager.GetString("enemy_turn"));
-        int key = m_console.GetKey();
+        m_console->Print(40, 2, m_dataManager->GetString("enemy_turn"));
+        int key = m_console->GetKey();
 
         int damage = m_totalEnemyATK;
         m_player->RestoreHP(-damage);
-        m_console.ClearScreen();
+        m_console->ClearScreen();
         m_game->HUD(0);
         EnemyHUD();
-        m_console.Print(0, 0, m_dataManager.GetString("enemy_attacked"));
-        key = m_console.GetKey();
+        m_console->Print(40, 2, m_dataManager->GetString("enemy_attacked"));
+        key = m_console->GetKey();
     }
 }
 void BattleManager::EnemyHUD() {
     int x = 80;
-    m_console.Print(x, 1, m_dataManager.GetString("en") + m_enemy->GetName());
-    m_console.Print(x, 2, m_dataManager.GetString("en_hp") + std::to_string(m_enemy->GetCurrentHP()));
-    m_console.Print(x, 3, m_dataManager.GetString("en_atk") + std::to_string(m_totalEnemyATK));
-    m_console.Print(x, 4, m_dataManager.GetString("en_spd") + std::to_string(m_totalEnemySPD));
-    m_console.Print(x, 5, m_dataManager.GetString("en_in") + std::to_string(m_eInitiative));
-    m_console.Print(30, 4, m_dataManager.GetString("p_in") + std::to_string(m_pInitiative));
+    m_console->Print(x, 1, m_dataManager->GetString("en") + m_enemy->GetName());
+    m_console->Print(x, 2, m_dataManager->GetString("en_hp") + std::to_string(m_enemy->GetCurrentHP()));
+    m_console->Print(x, 3, m_dataManager->GetString("en_atk") + std::to_string(m_totalEnemyATK));
+    m_console->Print(x, 4, m_dataManager->GetString("en_spd") + std::to_string(m_totalEnemySPD));
+    m_console->Print(40, 4, m_dataManager->GetString("en_in") + std::to_string(m_eInitiative));
+    m_console->Print(40, 3, m_dataManager->GetString("p_in") + std::to_string(m_pInitiative));
 }
 
 void BattleManager::SpellChoice() {
@@ -294,32 +293,32 @@ void BattleManager::SpellChoice() {
     std::string name3 = m_spells[2].GetName();
     while (true) {
         if (choice_spell == 0) {
-            m_console.Print(2, 21, m_dataManager.GetString("sel_ch") + name1);
-            m_console.Print(2, 22, m_dataManager.GetString("sel") + name2);
-            m_console.Print(2, 23, m_dataManager.GetString("sel") + name3);
-            m_console.Print(2, 24, m_dataManager.GetString("sel_return"));
+            m_console->Print(40, 6, m_dataManager->GetString("sel_ch") + name1);
+            m_console->Print(40, 7, m_dataManager->GetString("sel") + name2);
+            m_console->Print(40, 8, m_dataManager->GetString("sel") + name3);
+            m_console->Print(40, 9, m_dataManager->GetString("sel_return"));
         }
         else if (choice_spell == 1) {
-            m_console.Print(2, 21, m_dataManager.GetString("sel") + name1);
-            m_console.Print(2, 22, m_dataManager.GetString("sel_ch") + name2);
-            m_console.Print(2, 23, m_dataManager.GetString("sel") + name3);
-            m_console.Print(2, 24, m_dataManager.GetString("sel_return"));
+            m_console->Print(40, 6, m_dataManager->GetString("sel") + name1);
+            m_console->Print(40, 7, m_dataManager->GetString("sel_ch") + name2);
+            m_console->Print(40, 8, m_dataManager->GetString("sel") + name3);
+            m_console->Print(40, 9, m_dataManager->GetString("sel_return"));
         }
         else if (choice_spell == 2){
-            m_console.Print(2, 21, m_dataManager.GetString("sel") + name1);
-            m_console.Print(2, 22, m_dataManager.GetString("sel") + name2);
-            m_console.Print(2, 23, m_dataManager.GetString("sel_ch") + name3);
-            m_console.Print(2, 24, m_dataManager.GetString("sel_return"));
+            m_console->Print(40, 6, m_dataManager->GetString("sel") + name1);
+            m_console->Print(40, 7, m_dataManager->GetString("sel") + name2);
+            m_console->Print(40, 8, m_dataManager->GetString("sel_ch") + name3);
+            m_console->Print(40, 9, m_dataManager->GetString("sel_return"));
         }
         else {
-            m_console.Print(2, 21, m_dataManager.GetString("sel") + name1);
-            m_console.Print(2, 22, m_dataManager.GetString("sel") + name2);
-            m_console.Print(2, 23, m_dataManager.GetString("sel") + name3);
-            m_console.Print(2, 24, m_dataManager.GetString("sel_ch_return"));
+            m_console->Print(40, 6, m_dataManager->GetString("sel") + name1);
+            m_console->Print(40, 7, m_dataManager->GetString("sel") + name2);
+            m_console->Print(40, 8, m_dataManager->GetString("sel") + name3);
+            m_console->Print(40, 9, m_dataManager->GetString("sel_ch_return"));
         }
-        int key = m_console.GetKey();
+        int key = m_console->GetKey();
         if (key == 224) {
-            key = m_console.GetKey();
+            key = m_console->GetKey();
             if (key == 72) {
                 choice_spell--;
                 if (choice_spell < 0) choice_spell = 3;
@@ -334,11 +333,11 @@ void BattleManager::SpellChoice() {
     if (choice_spell == 0) {
         if (m_player->GetCurrentMP() >= m_spells[0].GetCost()) {
             m_player->RestoreMP(-m_spells[0].GetCost());
-            if (name1 == "Ярость") {
+            if (name1.size() == 7) {
                 m_rage_dur = m_spells[0].GetMaxDur();
                 m_totalATK = m_sp.Rage(m_player);
             }
-            else if (name1 == "Удар в спину") {
+            else if (name1.size() == 13) {
                 m_enemy->TakeDamage(m_sp.Backstab());
             }
             else {
@@ -352,10 +351,10 @@ void BattleManager::SpellChoice() {
     else if (choice_spell == 1) {
         if (m_player->GetCurrentMP() >= m_spells[1].GetCost()) {
             m_player->RestoreMP(-m_spells[1].GetCost());
-            if (name2 == "Размашистый удар") {
+            if (name2.size() == 17) {
                 m_enemy->TakeDamage(m_sp.Sweeping_strike());
             }
-            else if (name2 == "Зелье скорости") {
+            else if (name2.size() == 15) {
                 m_spdPotion_dur = m_spells[1].GetMaxDur();
                 m_totalSPD = m_sp.Speed_potion(m_player);
             }
@@ -371,10 +370,10 @@ void BattleManager::SpellChoice() {
     else if (choice_spell == 2){
         if (m_player->GetCurrentMP() >= m_spells[2].GetCost()) {
             m_player->RestoreMP(-m_spells[2].GetCost());
-            if (name3 == "Зелье регенерации") {
+            if (name3.size() == 18) {
                 m_regen_dur = m_spells[2].GetMaxDur();
             }
-            else if (name3 == "Пыль в глаза") {
+            else if (name3.size() == 13) {
                 m_dusk_dur = m_spells[2].GetMaxDur();
                 m_totalEnemyATK = m_sp.Dust_in_eyes(m_enemy);
             }

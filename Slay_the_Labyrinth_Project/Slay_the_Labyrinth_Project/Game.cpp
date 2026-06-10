@@ -132,20 +132,20 @@ void Game::EnterRoom(RoomType type) {
 
   switch (type) {
     case RoomType::REST:
-      room = new RestRoom(&m_dataManager, &m_console, this);
+      room = new RestRoom(&m_dataManager, this);
       break;
     case RoomType::SHOP:
       room = new ShopRoom(&m_dataManager, &m_console, this);
       break;
     case RoomType::MONSTER:
-      room = new MonsterRoom(this);
-      break;
+        room = new MonsterRoom(this, &m_dataManager, &m_console);
+        break;
     case RoomType::ELITE:
-      room = new EliteRoom(this);
-      break;
+        room = new EliteRoom(this, &m_dataManager, &m_console);
+        break;
     case RoomType::BOSS:
-      room = new BossRoom(this);
-      break;
+        room = new BossRoom(this, &m_dataManager, &m_console);
+        break;
   }
 
   if (room != nullptr) {
