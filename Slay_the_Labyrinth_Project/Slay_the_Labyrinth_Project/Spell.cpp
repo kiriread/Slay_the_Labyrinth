@@ -40,25 +40,25 @@ std::vector<Spell> Spell::MageSpells() {
 }
 
 int Spell::Rage(Player* player) {
-	return { player->GetATK() * 2 };
+	return { player->GetATK() * 2 -  20};
 }
-int Spell::Sweeping_strike() {
-	return 40;
+int Spell::Sweeping_strike(int intell) {
+	return 20 + (intell / 2);
 }
 int Spell::Regeneration_potion() {
 	return 0;
 }
-int Spell::Backstab() {
-	return 35;
+int Spell::Backstab(int intell) {
+	return 15 + (intell / 2);
 }
 int Spell::Speed_potion(Player* player) {
-	return { player->GetSPD() * 2};
+	return { player->GetSPD() * 2 - 20};
 }
 int Spell::Dust_in_eyes(Enemy* enemy) {
 	return ( enemy->GetATK() / 2);
 }
-int Spell::Fireball(){
-	return 50;
+int Spell::Fireball(int intell){
+	return 30 + (intell / 2);
 }
 int Spell::Frost_vortex(Enemy* enemy) {
 	return { enemy->GetSPD() / 2};

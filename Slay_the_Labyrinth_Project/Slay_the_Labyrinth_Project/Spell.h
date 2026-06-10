@@ -24,12 +24,12 @@ public:
 	std::vector<Spell> GetSpells(std::string class_name);
 
 	int Rage(Player* player);
-	int Sweeping_strike();
+	int Sweeping_strike(int intell);
 	int Regeneration_potion();
-	int Backstab();
+	int Backstab(int intell);
 	int Speed_potion(Player* player);
 	int Dust_in_eyes(Enemy* enemy);
-	int Fireball();
+	int Fireball(int intell);
 	int Frost_vortex(Enemy* enemy);
 	int Healing();
 

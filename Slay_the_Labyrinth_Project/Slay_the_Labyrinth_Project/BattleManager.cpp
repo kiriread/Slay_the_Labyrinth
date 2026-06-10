@@ -16,8 +16,6 @@ BattleManager::BattleManager(Player* player, Game* game, DataManager* dm,
       m_isPlayerTurn(true),
       m_dataManager(dm),
       m_console(co),
-      m_totalATK(m_player->GetATK()),
-      m_totalSPD(m_player->GetSPD()),
       m_totalEnemyATK(0),
       m_totalEnemySPD(0),
       m_rage_dur(0),
@@ -35,7 +33,7 @@ void BattleManager::StartBattle(RoomType room) {
   m_enemy = enemyCreator.OnEnterB(room);
   m_fightType = room;
   if (room != RoomType::MONSTER && m_player->HasArtifact("trial_amulet")) {
-    m_totalATK += 10;
+      m_player->ChangeBonusATKSP(0, 0, 1, 0);
   }
   m_spells = m_sp.GetSpells(m_player->GetClassName());
   m_totalEnemyATK = m_enemy->GetATK();
@@ -56,11 +54,21 @@ void BattleManager::StartBattle(RoomType room) {
 
     if (m_enemy->GetCurrentHP() <= 0) {
       if (room == RoomType::MONSTER) {
+          if (m_rage_dur != 0)
+              m_player->ChangeBonusATKSP(0, 0, 0, 0);
+          if (m_spdPotion_dur != 0)
+              m_player->ChangeBonusSPDSP(0, 0);
         if (m_player->GetCurrentHP() == m_player->GetMaxHP()) {
           m_player->AddPerfectionStats();
         }
         m_player->AddGold(300);
       } else if (room == RoomType::ELITE) {
+          if (m_rage_dur != 0)
+              m_player->ChangeBonusATKSP(0, 0, 0, 0);
+          if (m_spdPotion_dur != 0)
+              m_player->ChangeBonusSPDSP(0, 0);
+          if (m_player->HasArtifact("trial_amulet"))
+              m_player->ChangeBonusATKSP(0, 0, 0, 1);
         if (m_player->GetCurrentHP() == m_player->GetMaxHP()) {
           m_player->AddPerfectionStats();
         }
@@ -89,7 +97,7 @@ void BattleManager::StartBattle(RoomType room) {
 }
 
 void BattleManager::CalculateInitiative() {
-  int playerSpd = m_totalSPD;
+  int playerSpd = m_player->GetSPD();
   int enemySpd = m_totalEnemySPD;
 
   if ((100 - m_pInitiative) / playerSpd <= (100 - m_eInitiative) / enemySpd) {
@@ -107,7 +115,7 @@ void BattleManager::PlayerTurn() {
   if (m_rage_dur != 0) {
     m_rage_dur -= 1;
     if (m_rage_dur == 0) {
-      m_totalATK /= 2;
+      m_player->ChangeBonusATKSP(0, 0, 0, 0);
     }
   }
   if (m_regen_dur != 0) {
@@ -119,7 +127,7 @@ void BattleManager::PlayerTurn() {
   if (m_spdPotion_dur != 0) {
     m_spdPotion_dur -= 1;
     if (m_spdPotion_dur == 0) {
-      m_totalSPD /= 2;
+        m_player->ChangeBonusSPDSP(0, 0);
     }
   }
   if (m_player->HasArtifact("healing_sprout")) {
@@ -152,7 +160,7 @@ void BattleManager::PlayerTurn() {
     }
     if (key == 13) break;
   }
-  int damage = m_totalATK;
+  int damage = m_player->GetATK();
   if (choice == 0)
     m_enemy->TakeDamage(damage);
   else {
@@ -299,22 +307,22 @@ void BattleManager::SpellChoice() {
       m_console->Print(40, 6, m_dataManager->GetString("sel_ch") + name1);
       m_console->Print(40, 7, m_dataManager->GetString("sel") + name2);
       m_console->Print(40, 8, m_dataManager->GetString("sel") + name3);
-      m_console->Print(40, 9, m_dataManager->GetString("sel_return"));
+      m_console->Print(40, 10, m_dataManager->GetString("sel_return"));
     } else if (choice_spell == 1) {
       m_console->Print(40, 6, m_dataManager->GetString("sel") + name1);
       m_console->Print(40, 7, m_dataManager->GetString("sel_ch") + name2);
       m_console->Print(40, 8, m_dataManager->GetString("sel") + name3);
-      m_console->Print(40, 9, m_dataManager->GetString("sel_return"));
+      m_console->Print(40, 10, m_dataManager->GetString("sel_return"));
     } else if (choice_spell == 2) {
       m_console->Print(40, 6, m_dataManager->GetString("sel") + name1);
       m_console->Print(40, 7, m_dataManager->GetString("sel") + name2);
       m_console->Print(40, 8, m_dataManager->GetString("sel_ch") + name3);
-      m_console->Print(40, 9, m_dataManager->GetString("sel_return"));
+      m_console->Print(40, 10, m_dataManager->GetString("sel_return"));
     } else {
       m_console->Print(40, 6, m_dataManager->GetString("sel") + name1);
       m_console->Print(40, 7, m_dataManager->GetString("sel") + name2);
       m_console->Print(40, 8, m_dataManager->GetString("sel") + name3);
-      m_console->Print(40, 9, m_dataManager->GetString("sel_ch_return"));
+      m_console->Print(40, 10, m_dataManager->GetString("sel_ch_return"));
     }
     int key = m_console->GetKey();
     if (key == 224) {
@@ -335,11 +343,11 @@ void BattleManager::SpellChoice() {
       m_player->RestoreMP(-m_spells[0].GetCost());
       if (name1.size() == 7) {
         m_rage_dur = m_spells[0].GetMaxDur();
-        m_totalATK = m_sp.Rage(m_player);
+        m_player->ChangeBonusATKSP(m_sp.Rage(m_player), 1, 0, 0);
       } else if (name1.size() == 13) {
-        m_enemy->TakeDamage(m_sp.Backstab());
+        m_enemy->TakeDamage(m_sp.Backstab(m_player->GetINT()));
       } else {
-        m_enemy->TakeDamage(m_sp.Fireball());
+        m_enemy->TakeDamage(m_sp.Fireball(m_player->GetINT()));
       }
     } else {
       SpellChoice();
@@ -348,10 +356,10 @@ void BattleManager::SpellChoice() {
     if (m_player->GetCurrentMP() >= m_spells[1].GetCost()) {
       m_player->RestoreMP(-m_spells[1].GetCost());
       if (name2.size() == 17) {
-        m_enemy->TakeDamage(m_sp.Sweeping_strike());
+        m_enemy->TakeDamage(m_sp.Sweeping_strike(m_player->GetINT()));
       } else if (name2.size() == 15) {
         m_spdPotion_dur = m_spells[1].GetMaxDur();
-        m_totalSPD = m_sp.Speed_potion(m_player);
+        m_player->ChangeBonusSPDSP(m_sp.Speed_potion(m_player), 1);
       } else {
         m_frost_dur = m_spells[1].GetMaxDur();
         m_totalEnemySPD = m_sp.Frost_vortex(m_enemy);

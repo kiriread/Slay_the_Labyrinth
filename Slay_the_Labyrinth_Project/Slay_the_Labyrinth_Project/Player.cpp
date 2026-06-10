@@ -106,3 +106,23 @@ void Player::AddPerfectionStats() {
 void Player::DelAmulet() {
     m_inventory.erase(std::remove(m_inventory.begin(), m_inventory.end(), "revival_amulet"), m_inventory.end());
 }
+
+void Player::ChangeBonusATKSP(int amount, bool isActivate, bool isElst, bool isElen) {
+    if (isActivate && !isElst && !isElen)
+        m_stats.BonusATK = amount;
+    else if (isElst)
+        m_stats.BonusATK += 10;
+    else
+        m_stats.BonusATK -= GetATK() / 2;
+    if (isElen)
+        m_stats.BonusATK -= 10;
+
+
+}
+
+void Player::ChangeBonusSPDSP(int amount, bool isActivate) {
+    if (isActivate)
+        m_stats.BonusSPD = amount;
+    else
+        m_stats.BonusSPD -= GetSPD() / 2;
+}
