@@ -120,9 +120,7 @@ void BattleManager::PlayerTurn() {
   }
   if (m_regen_dur != 0) {
     m_regen_dur -= 1;
-    if (m_regen_dur != 0) {
-      m_player->RestoreHP(m_sp.Regeneration_potion());
-    }
+    m_player->RestoreHP(m_sp.Regeneration_potion());
   }
   if (m_spdPotion_dur != 0) {
     m_spdPotion_dur -= 1;
@@ -132,6 +130,9 @@ void BattleManager::PlayerTurn() {
   }
   if (m_player->HasArtifact("healing_sprout")) {
     m_player->RestoreHP(5);
+  }
+  if (m_player->HasArtifact("diadem")) {
+      m_player->RestoreMP(5);
   }
   m_console->ClearScreen();
   m_game->HUD(0);
@@ -164,10 +165,6 @@ void BattleManager::PlayerTurn() {
   if (choice == 0)
     m_enemy->TakeDamage(damage);
   else {
-    m_console->ClearScreen();
-    m_game->HUD(0);
-    m_console->Print(40, 2, m_dataManager->GetString("your_turn"));
-    EnemyHUD();
     SpellChoice();
   }
   m_console->ClearScreen();
@@ -191,8 +188,11 @@ void BattleManager::EnemyTurn() {
   }
   if (m_enemy->GetName().size() == 14 && m_fightType == RoomType::BOSS) {
     if (m_bossSkillCD == 0) {
-      m_totalEnemyATK /= 2;
-      m_totalEnemySPD /= 2;
+        if (!m_isFCry) {
+            m_totalEnemyATK /= 1.5;
+            m_totalEnemySPD /= 1.5;
+      }
+        m_isFCry = false;
       m_console->ClearScreen();
       m_game->HUD(0);
       EnemyHUD();
@@ -298,6 +298,10 @@ void BattleManager::EnemyHUD() {
 }
 
 void BattleManager::SpellChoice() {
+    m_console->ClearScreen();
+    m_game->HUD(0);
+    m_console->Print(40, 2, m_dataManager->GetString("your_turn"));
+    EnemyHUD();
   int choice_spell = 0;
   std::string name1 = m_spells[0].GetName();
   std::string name2 = m_spells[1].GetName();
@@ -350,6 +354,8 @@ void BattleManager::SpellChoice() {
         m_enemy->TakeDamage(m_sp.Fireball(m_player->GetINT()));
       }
     } else {
+        m_console->Print(40, 12, m_dataManager->GetString("l_mana"));
+        int key = m_console->GetKey();
       SpellChoice();
     }
   } else if (choice_spell == 1) {
@@ -365,6 +371,8 @@ void BattleManager::SpellChoice() {
         m_totalEnemySPD = m_sp.Frost_vortex(m_enemy);
       }
     } else {
+        m_console->Print(40, 12, m_dataManager->GetString("l_mana"));
+        int key = m_console->GetKey();
       SpellChoice();
     }
   } else if (choice_spell == 2) {
@@ -376,9 +384,11 @@ void BattleManager::SpellChoice() {
         m_dusk_dur = m_spells[2].GetMaxDur();
         m_totalEnemyATK = m_sp.Dust_in_eyes(m_enemy);
       } else {
-        m_player->RestoreHP(m_sp.Healing());
+        m_player->RestoreHP(m_sp.Healing(m_player->GetINT()));
       }
     } else {
+        m_console->Print(40, 12, m_dataManager->GetString("l_mana"));
+        int key = m_console->GetKey();
       SpellChoice();
     }
   } else {
