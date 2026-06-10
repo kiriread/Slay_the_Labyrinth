@@ -1,13 +1,14 @@
-#pragma once
+﻿#pragma once
 #include <string>
 #include <vector>
 #include "Stats.h"
+#include "DataManager.h"
 
 class Enemy {
 private:
     std::string m_name;
     Stats m_stats;
-
+    DataManager m_dataManager;
 public:
     Enemy(std::string name, int hp, int atk, int spd);
 
@@ -24,6 +25,6 @@ public:
 };
 
 // Factory functions
-std::vector<Enemy> RegularEnemy();
-std::vector<Enemy> EliteEnemy();
-std::vector<Enemy> Bosses();
+std::vector<Enemy> RegularEnemy(DataManager& dataManager);
+std::vector<Enemy> EliteEnemy(DataManager& dataManager);
+std::vector<Enemy> Bosses(DataManager& dataManager);

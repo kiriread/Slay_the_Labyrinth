@@ -11,7 +11,7 @@
     "spells": ["rage", "sweeping_strike", "regeneration_potion"]
   },
   "rogue": {
-    "name": "Плут",
+    "name": "Разбойник",
     "base_stats": {
       "max_hp": 80,
       "atk": 15,

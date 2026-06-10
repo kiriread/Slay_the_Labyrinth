@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 
 Game::Game() : m_isRunning(false), m_player(nullptr) {
   m_dataManager.LoadClasses("assets/json/classes.json");
@@ -75,49 +75,56 @@ void Game::MainMenu() {
 }
 
 void Game::RoomChoice() {
-  m_roomOptions = m_mapGenerator.GenerateRoomOptions(m_currentCount);
-  int choice = 0;
-  int maxChoice = (int)m_roomOptions.size() - 1;
+  if (m_currentCount == 10) {
+    EnterRoom(RoomType::BOSS);
+  }
+  else {
+      m_roomOptions = m_mapGenerator.GenerateRoomOptions(m_currentCount);
+      int choice = 0;
+      int maxChoice = (int)m_roomOptions.size() - 1;
 
-  while (true) {
-    m_console.ClearScreen();
-    HUD(60);
+      while (true) {
+          m_console.ClearScreen();
+          HUD(60);
 
-    m_console.Print(1, 1,
-                    m_dataManager.GetString("count_label") + " " +
-                        std::to_string(m_currentCount) + "/10");
-    m_console.Print(1, 2, m_dataManager.GetString("choose_room"));
+          m_console.Print(1, 1,
+              m_dataManager.GetString("count_label") + " " +
+              std::to_string(m_currentCount) + "/10");
+          m_console.Print(1, 2, m_dataManager.GetString("choose_room"));
 
-    for (int i = 0; i < m_roomOptions.size(); i++) {
-      std::string name = m_dataManager.GetRoomName(m_roomOptions[i]);
-      if (i == choice) {
-        m_console.Print(2, 4 + i, "> " + name);
-      } else {
-        m_console.Print(2, 4 + i, "  " + name);
+          for (int i = 0; i < m_roomOptions.size(); i++) {
+              std::string name = m_dataManager.GetRoomName(m_roomOptions[i]);
+              if (i == choice) {
+                  m_console.Print(2, 4 + i, "> " + name);
+              }
+              else {
+                  m_console.Print(2, 4 + i, "  " + name);
+              }
+          }
+
+          /*m_console.Print(1, 11, m_dataManager.GetString("continueEnter"));*/
+          int key = m_console.GetKey();
+
+          if (key == 224) {
+              key = m_console.GetKey();
+              if (key == 72) {
+                  choice--;
+                  if (choice < 0) choice = maxChoice;
+              }
+              if (key == 80) {
+                  choice++;
+                  if (choice > maxChoice) choice = 0;
+              }
+          }
+
+          if (key == 13) {
+              break;
+          }
       }
-    }
 
-    /*m_console.Print(1, 11, m_dataManager.GetString("continueEnter"));*/
-    int key = m_console.GetKey();
-
-    if (key == 224) {
-      key = m_console.GetKey();
-      if (key == 72) {
-        choice--;
-        if (choice < 0) choice = maxChoice;
-      }
-      if (key == 80) {
-        choice++;
-        if (choice > maxChoice) choice = 0;
-      }
-    }
-
-    if (key == 13) {
-      break;
-    }
+      EnterRoom(m_roomOptions[choice]);
   }
 
-  EnterRoom(m_roomOptions[choice]);
 }
 
 void Game::EnterRoom(RoomType type) {

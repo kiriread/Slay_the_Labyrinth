@@ -102,3 +102,7 @@ void Player::AddPerfectionStats() {
     m_stats.BonusINT += 3;
     m_stats.BonusSPD += 3;
 }
+
+void Player::DelAmulet() {
+    m_inventory.erase(std::remove(m_inventory.begin(), m_inventory.end(), "revival_amulet"), m_inventory.end());
+}

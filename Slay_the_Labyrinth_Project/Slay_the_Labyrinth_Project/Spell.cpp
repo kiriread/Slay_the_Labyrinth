@@ -8,15 +8,16 @@ Spell::Spell(std::string name, int cur_dur, int max_dur, int cost) : m_name(name
 	m_MaxDur(max_dur),
 	m_cost(cost)
 {
+	m_dataManager.LoadSpells("assets/json/spells.json");
 }
 
 std::vector<Spell> Spell::GetSpells(std::string class_name) {
 	std::vector<Spell> spells;
 	for (int i = 0; i < 3; i++) {
-		if (class_name == "warrior") {
+		if (class_name.size() == 5) {
 			return WarriorSpells();
 		}
-		else if (class_name == "rogue") {
+		else if (class_name.size() == 10) {
 			return RogueSpells();
 		}
 		else {
@@ -25,16 +26,17 @@ std::vector<Spell> Spell::GetSpells(std::string class_name) {
 	}
 }
 std::vector<Spell> Spell::WarriorSpells() {
-	return { Spell("Rage", 0, 3, 30), Spell("Sweeping strike", 0, 0, 20), 
-		Spell("Regeneration potion", 0, 3, 30)};
+	return { Spell(m_dataManager.GetSpellName("rage"), 0, 3, 30), Spell(m_dataManager.GetSpellName("sweeping_strike"), 0, 0, 20),
+		Spell(m_dataManager.GetSpellName("regeneration_potion"), 0, 3, 30)};
 }
 std::vector<Spell> Spell::RogueSpells() {
-	return { Spell("Backstab", 0, 0, 18), Spell("Speed potion", 0, 3, 30),
-		Spell("Dust in eyes", 0, 3, 30) };
+
+	return { Spell(m_dataManager.GetSpellName("backstab"), 0, 0, 18), Spell(m_dataManager.GetSpellName("speed_potion"), 0, 3, 30),
+		Spell(m_dataManager.GetSpellName("dust_in_eyes"), 0, 3, 30) };
 }
 std::vector<Spell> Spell::MageSpells() {
-	return { Spell("Fireball", 0, 0, 30), Spell("Frost vortex", 0, 3, 30),
-		Spell("Healing", 0, 0, 20) };
+	return { Spell(m_dataManager.GetSpellName("fireball"), 0, 0, 30), Spell(m_dataManager.GetSpellName("frost_vortex"), 0, 3, 30),
+		Spell(m_dataManager.GetSpellName("healing"), 0, 0, 20) };
 }
 
 int Spell::Rage(Player* player) {

@@ -3,6 +3,7 @@
 #include "DataManager.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "DataManager.h"
 
 class Spell {
 private:

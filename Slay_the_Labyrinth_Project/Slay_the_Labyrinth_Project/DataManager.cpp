@@ -1,4 +1,4 @@
-#include "DataManager.h"
+п»ї#include "DataManager.h"
 
 #include <windows.h>
 
@@ -10,7 +10,7 @@
 void DataManager::LoadClasses(const std::string& filepath) {
   std::ifstream file(filepath);
   if (!file.is_open()) {
-    std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
+    std::cerr << "РћС€РёР±РєР°: РЅРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ " << filepath << std::endl;
     return;
   }
   file >> m_classData;
@@ -21,7 +21,7 @@ Stats DataManager::GetClassStats(const std::string& classId) {
   Stats stats;
 
   if (!m_classData.contains(classId)) {
-    std::cerr << "Ошибка: класс '" << classId << "' не найден в JSON"
+    std::cerr << "РћС€РёР±РєР°: РєР»Р°СЃСЃ '" << classId << "' РЅРµ РЅР°Р№РґРµРЅ РІ JSON"
               << std::endl;
     return stats;
   }
@@ -56,7 +56,7 @@ std::string DataManager::UTF8to1251(const std::string& utf8) const {
 
 std::string DataManager::GetClassNamee(const std::string& classId) {
   if (!m_classData.contains(classId)) {
-    return "Неизвестно";
+    return "РќРµРёР·РІРµСЃС‚РЅРѕ";
   }
   return UTF8to1251(m_classData[classId]["name"]);
 }
@@ -79,7 +79,7 @@ std::vector<std::string> DataManager::GetClassSpells(
 void DataManager::LoadRooms(const std::string& filepath) {
     std::ifstream file(filepath);
     if (!file.is_open()) {
-        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
+        std::cerr << "РћС€РёР±РєР°: РЅРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ " << filepath << std::endl;
         return;
     }
     file >> m_roomData;
@@ -110,7 +110,7 @@ std::string DataManager::GetRoomDescription(RoomType type) {
 void DataManager::LoadStrings(const std::string& filepath) {
     std::ifstream file(filepath);
     if (!file.is_open()) {
-        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
+        std::cerr << "РћС€РёР±РєР°: РЅРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ " << filepath << std::endl;
         return;
     }
     file >> m_stringsData;
@@ -125,7 +125,7 @@ std::string DataManager::GetString(const std::string& key) {
 void DataManager::LoadArtifacts(const std::string& filepath) {
     std::ifstream file(filepath);
     if (!file.is_open()) {
-        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
+        std::cerr << "РћС€РёР±РєР°: РЅРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ " << filepath << std::endl;
         return;
     }
     file >> m_artifactsData;
@@ -134,7 +134,7 @@ void DataManager::LoadArtifacts(const std::string& filepath) {
 
 std::string DataManager::GetArtifactName(const std::string& id) const {
     if (!m_artifactsData.contains(id)) {
-        return "Неизвестно";
+        return "РќРµРёР·РІРµСЃС‚РЅРѕ";
     }
     return UTF8to1251(m_artifactsData[id]["name"]);
 }
@@ -156,7 +156,7 @@ int DataManager::GetArtifactPrice(const std::string& id) const {
 void DataManager::LoadSpells(const std::string& filepath) {
     std::ifstream file(filepath);
     if (!file.is_open()) {
-        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
+        std::cerr << "РћС€РёР±РєР°: РЅРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ " << filepath << std::endl;
         return;
     }
     file >> m_spellsData;
@@ -164,7 +164,7 @@ void DataManager::LoadSpells(const std::string& filepath) {
 }
 
 std::string DataManager::GetSpellName(const std::string& id) const {
-    if (!m_spellsData.contains(id)) return "Неизвестно";
+    if (!m_spellsData.contains(id)) return "РќРµРёР·РІРµСЃС‚РЅРѕ";
     return UTF8to1251(m_spellsData[id]["name"]);
 }
 
@@ -176,7 +176,7 @@ int DataManager::GetSpellMana(const std::string& id) const {
 std::vector<std::string> DataManager::GetRandomArtifactIdsExcluding(int count, const std::vector<std::string>& exclude) const {
     std::vector<std::string> ids;
 
-    // Собрать все ID, кроме уже имеющихся
+    // РЎРѕР±СЂР°С‚СЊ РІСЃРµ ID, РєСЂРѕРјРµ СѓР¶Рµ РёРјРµСЋС‰РёС…СЃСЏ
     for (auto& item : m_artifactsData.items()) {
         std::string id = item.key();
         bool isExcluded = false;
@@ -191,10 +191,10 @@ std::vector<std::string> DataManager::GetRandomArtifactIdsExcluding(int count, c
         }
     }
 
-    // Если доступных меньше чем count — вернуть сколько есть
+    // Р•СЃР»Рё РґРѕСЃС‚СѓРїРЅС‹С… РјРµРЅСЊС€Рµ С‡РµРј count вЂ” РІРµСЂРЅСѓС‚СЊ СЃРєРѕР»СЊРєРѕ РµСЃС‚СЊ
     if (ids.empty()) return {};
 
-    // Перемешать
+    // РџРµСЂРµРјРµС€Р°С‚СЊ
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(ids.begin(), ids.end(), g);

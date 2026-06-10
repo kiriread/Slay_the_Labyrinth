@@ -1,4 +1,4 @@
-#include "EnemyCreator.h"
+﻿#include "EnemyCreator.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -11,11 +11,11 @@ Enemy* EnemyCreator::OnEnterB(RoomType type) {
   int randIndex;
 
   if (type == RoomType::MONSTER) {
-    enemies = RegularEnemy();
+    enemies = RegularEnemy(m_dataManager);
   } else if (type == RoomType::ELITE) {
-    enemies = EliteEnemy();
+    enemies = EliteEnemy(m_dataManager);
   } else {
-    enemies = Bosses();
+    enemies = Bosses(m_dataManager);
   }
 
   randIndex = std::rand() % enemies.size();
