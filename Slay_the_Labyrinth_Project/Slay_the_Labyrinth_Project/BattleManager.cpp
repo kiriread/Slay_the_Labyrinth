@@ -189,7 +189,7 @@ void BattleManager::EnemyTurn() {
       m_totalEnemySPD *= 2;
     }
   }
-  if (m_enemy->GetName() == "Чёрный дракон") {
+  if (m_enemy->GetName().size() == 14 && m_fightType == RoomType::BOSS) {
     if (m_bossSkillCD == 0) {
       m_totalEnemyATK /= 2;
       m_totalEnemySPD /= 2;
@@ -227,7 +227,7 @@ void BattleManager::EnemyTurn() {
       m_console->Print(40, 2, m_dataManager->GetString("enemy_attacked"));
       key = m_console->GetKey();
     }
-  } else if (m_enemy->GetName() == "Суккуб") {
+  } else if (m_fightType == RoomType::BOSS) {
     if (m_bossSkillCD == 0) {
       m_console->ClearScreen();
       m_game->HUD(0);
@@ -387,13 +387,13 @@ void BattleManager::SpellChoice() {
 }
 
 void BattleManager::DragonCry() {
-  m_totalEnemySPD *= 2;
-  m_totalEnemyATK *= 2;
+  m_totalEnemySPD *= 1.5;
+  m_totalEnemyATK *= 1.5;
   m_bossSkillCD = 3;
 }
 
 void BattleManager::LifeSteal() {
-  m_player->RestoreHP(-40);
-  m_enemy->TakeDamage(-40);
+  m_player->RestoreHP(-10);
+  m_enemy->TakeDamage(-10);
   m_bossSkillCD = 3;
 }
