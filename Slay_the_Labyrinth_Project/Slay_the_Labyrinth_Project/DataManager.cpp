@@ -2,26 +2,28 @@
 
 #include <windows.h>
 
+#include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <algorithm>
 #include <random>
 
+// Загружаем классы из JSON
 void DataManager::LoadClasses(const std::string& filepath) {
   std::ifstream file(filepath);
   if (!file.is_open()) {
-    std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
+    std::cerr << GetString("Error") << filepath << std::endl;
     return;
   }
   file >> m_classData;
   file.close();
 }
 
+// Получаем статы класса по ID
 Stats DataManager::GetClassStats(const std::string& classId) {
   Stats stats;
 
   if (!m_classData.contains(classId)) {
-    std::cerr << "Ошибка: класс '" << classId << "' не найден в JSON"
+    std::cerr << GetString("ErrorClass") << classId << GetString("NotFound")
               << std::endl;
     return stats;
   }
@@ -40,6 +42,7 @@ Stats DataManager::GetClassStats(const std::string& classId) {
   return stats;
 }
 
+// Конвертация UTF-8 → Windows-1251 (для вывода в консоль)
 std::string DataManager::UTF8to1251(const std::string& utf8) const {
   int size = MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, nullptr, 0);
   std::wstring wtext(size, L'\0');
@@ -54,13 +57,15 @@ std::string DataManager::UTF8to1251(const std::string& utf8) const {
   return result;
 }
 
+// Русское название класса по ID
 std::string DataManager::GetClassNamee(const std::string& classId) {
   if (!m_classData.contains(classId)) {
-    return "Неизвестно";
+    return GetString("Unknown");
   }
   return UTF8to1251(m_classData[classId]["name"]);
 }
 
+// Список ID заклинаний класса
 std::vector<std::string> DataManager::GetClassSpells(
     const std::string& classId) {
   std::vector<std::string> spells;
@@ -76,129 +81,150 @@ std::vector<std::string> DataManager::GetClassSpells(
   return spells;
 }
 
+// Загружаем комнаты из JSON
 void DataManager::LoadRooms(const std::string& filepath) {
-    std::ifstream file(filepath);
-    if (!file.is_open()) {
-        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
-        return;
-    }
-    file >> m_roomData;
-    file.close();
+  std::ifstream file(filepath);
+  if (!file.is_open()) {
+    std::cerr << GetString("Error") << filepath << std::endl;
+    return;
+  }
+  file >> m_roomData;
+  file.close();
 }
 
+// Преобразование enum в строку-ключ для JSON
 std::string DataManager::RoomTypeToString(RoomType type) {
-    switch (type) {
-    case RoomType::REST:    return "REST";
-    case RoomType::SHOP:    return "SHOP";
-    case RoomType::MONSTER: return "MONSTER";
-    case RoomType::ELITE:   return "ELITE";
-    case RoomType::BOSS:    return "BOSS";
-    default:                return "";
-    }
+  switch (type) {
+    case RoomType::REST:
+      return "REST";
+    case RoomType::SHOP:
+      return "SHOP";
+    case RoomType::MONSTER:
+      return "MONSTER";
+    case RoomType::ELITE:
+      return "ELITE";
+    case RoomType::BOSS:
+      return "BOSS";
+    default:
+      return "";
+  }
 }
 
+// Русское название комнаты
 std::string DataManager::GetRoomName(RoomType type) {
-    std::string key = RoomTypeToString(type);
-    return UTF8to1251(m_roomData["room_names"][key]);
+  std::string key = RoomTypeToString(type);
+  return UTF8to1251(m_roomData["room_names"][key]);
 }
 
+// Описание комнаты
 std::string DataManager::GetRoomDescription(RoomType type) {
-    std::string key = RoomTypeToString(type);
-    return UTF8to1251(m_roomData["room_descriptions"][key]);
+  std::string key = RoomTypeToString(type);
+  return UTF8to1251(m_roomData["room_descriptions"][key]);
 }
 
+// Загружаем игровые строки (интерфейс)
 void DataManager::LoadStrings(const std::string& filepath) {
-    std::ifstream file(filepath);
-    if (!file.is_open()) {
-        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
-        return;
-    }
-    file >> m_stringsData;
-    file.close();
+  std::ifstream file(filepath);
+  if (!file.is_open()) {
+    std::cerr << GetString("Error") << filepath << std::endl;
+    return;
+  }
+  file >> m_stringsData;
+  file.close();
 }
 
+// Получаем строку по ключу
 std::string DataManager::GetString(const std::string& key) {
-    if (!m_stringsData.contains(key)) return "";
-    return UTF8to1251(m_stringsData[key]);
+  if (!m_stringsData.contains(key)) return "";
+  return UTF8to1251(m_stringsData[key]);
 }
 
+// Загружаем артефакты из JSON
 void DataManager::LoadArtifacts(const std::string& filepath) {
-    std::ifstream file(filepath);
-    if (!file.is_open()) {
-        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
-        return;
-    }
-    file >> m_artifactsData;
-    file.close();
+  std::ifstream file(filepath);
+  if (!file.is_open()) {
+    std::cerr << GetString("Error") << filepath << std::endl;
+    return;
+  }
+  file >> m_artifactsData;
+  file.close();
 }
 
-std::string DataManager::GetArtifactName(const std::string& id) const {
-    if (!m_artifactsData.contains(id)) {
-        return "Неизвестно";
-    }
-    return UTF8to1251(m_artifactsData[id]["name"]);
+// Русское название артефакта
+std::string DataManager::GetArtifactName(const std::string& id) {
+  if (!m_artifactsData.contains(id)) {
+    return GetString("Unknown");
+  }
+  return UTF8to1251(m_artifactsData[id]["name"]);
 }
 
+// Описание артефакта
 std::string DataManager::GetArtifactDescription(const std::string& id) const {
-    if (!m_artifactsData.contains(id)) {
-        return "";
-    }
-    return UTF8to1251(m_artifactsData[id]["description"]);
+  if (!m_artifactsData.contains(id)) {
+    return "";
+  }
+  return UTF8to1251(m_artifactsData[id]["description"]);
 }
 
+// Цена артефакта
 int DataManager::GetArtifactPrice(const std::string& id) const {
-    if (!m_artifactsData.contains(id)) {
-        return 0;
-    }
-    return m_artifactsData[id]["price"];
+  if (!m_artifactsData.contains(id)) {
+    return 0;
+  }
+  return m_artifactsData[id]["price"];
 }
 
+// Загружаем заклинания из JSON
 void DataManager::LoadSpells(const std::string& filepath) {
-    std::ifstream file(filepath);
-    if (!file.is_open()) {
-        std::cerr << "Ошибка: не удалось открыть " << filepath << std::endl;
-        return;
-    }
-    file >> m_spellsData;
-    file.close();
+  std::ifstream file(filepath);
+  if (!file.is_open()) {
+    std::cerr << GetString("Error") << filepath << std::endl;
+    return;
+  }
+  file >> m_spellsData;
+  file.close();
 }
 
-std::string DataManager::GetSpellName(const std::string& id) const {
-    if (!m_spellsData.contains(id)) return "Неизвестно";
-    return UTF8to1251(m_spellsData[id]["name"]);
+// Русское название заклинания
+std::string DataManager::GetSpellName(const std::string& id) {
+  if (!m_spellsData.contains(id)) return GetString("Unknown");
+  return UTF8to1251(m_spellsData[id]["name"]);
 }
 
+// Стоимость заклинания в мане
 int DataManager::GetSpellMana(const std::string& id) const {
-    if (!m_spellsData.contains(id)) return 0;
-    return m_spellsData[id]["mana"];
+  if (!m_spellsData.contains(id)) return 0;
+  return m_spellsData[id]["mana"];
 }
 
-std::vector<std::string> DataManager::GetRandomArtifactIdsExcluding(int count, const std::vector<std::string>& exclude) const {
-    std::vector<std::string> ids;
+// Случайные ID артефактов, исключая уже имеющиеся у игрока
+std::vector<std::string> DataManager::GetRandomArtifactIdsExcluding(
+    int count, const std::vector<std::string>& exclude) const {
+  std::vector<std::string> ids;
 
-    // Собрать все ID, кроме уже имеющихся
-    for (auto& item : m_artifactsData.items()) {
-        std::string id = item.key();
-        bool isExcluded = false;
-        for (auto& ex : exclude) {
-            if (id == ex) {
-                isExcluded = true;
-                break;
-            }
-        }
-        if (!isExcluded) {
-            ids.push_back(id);
-        }
+  // Собираем все ID, кроме тех, что уже в инвентаре
+  for (auto& item : m_artifactsData.items()) {
+    std::string id = item.key();
+    bool isExcluded = false;
+    for (auto& ex : exclude) {
+      if (id == ex) {
+        isExcluded = true;
+        break;
+      }
     }
+    if (!isExcluded) {
+      ids.push_back(id);
+    }
+  }
 
-    // Если доступных меньше чем count — вернуть сколько есть
-    if (ids.empty()) return {};
+  // Если доступных меньше чем запрошено — вернуть сколько есть
+  if (ids.empty()) return {};
 
-    // Перемешать
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(ids.begin(), ids.end(), g);
+  // Перемешать случайно
+  std::random_device rd;
+  std::mt19937 g(rd());
+  std::shuffle(ids.begin(), ids.end(), g);
 
-    int resultSize = (count < (int)ids.size()) ? count : (int)ids.size();
-    return std::vector<std::string>(ids.begin(), ids.begin() + resultSize);
+  int resultSize = (count < (int)ids.size()) ? count : (int)ids.size();
+  return std::vector<std::string>(ids.begin(), ids.begin() + resultSize);
 }

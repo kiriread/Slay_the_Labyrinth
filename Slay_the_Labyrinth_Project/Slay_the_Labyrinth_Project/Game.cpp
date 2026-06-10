@@ -15,58 +15,59 @@ void Game::Run() {
   MainMenu();
 
   while (m_isRunning) {
-    m_console.WaitForEnter();
+    m_console.WaitForEnter(); // Ждём Enter перед выбором комнаты
     RoomChoice();
   }
 }
 
+// Меню выбора класса
 void Game::MainMenu() {
-  // Class IDs matching the JSON keys
   std::string ids[3] = {"warrior", "rogue", "mage"};
-  int choice = 0;  // Index of the currently selected class
+  int choice = 0; 
+  int maxChoice = 2;
 
   while (true) {
     m_console.ClearScreen();
 
-    // Draw menu header
+    // Вступительный текст
     m_console.Print(1, 1, m_dataManager.GetString("intro_line1"));
     m_console.Print(1, 2, m_dataManager.GetString("intro_line2"));
     m_console.Print(1, 5, m_dataManager.GetString("choose_class"));
 
-    // Draw class options with arrow indicator
+    // Вывод трёх классов с подсветкой выбранного
     for (int i = 0; i < 3; i++) {
       std::string name = m_dataManager.GetClassNamee(ids[i]);
       if (i == choice) {
-        m_console.Print(2, 7 + i, "> " + name);  // Highlighted
+        m_console.Print(2, 7 + i, "> " + name);  // Выбранный
       } else {
-        m_console.Print(2, 7 + i, "  " + name);  // Normal
+        m_console.Print(2, 7 + i, "  " + name);  // Остальные
       }
     }
 
-    /*m_console.Print(1, 11, m_dataManager.GetString("rules"));*/
     m_console.Print(1, 12, m_dataManager.GetString("continueEnter"));
     int key = m_console.GetKey();
 
-    // Handle arrow keys (two-code escape sequence)
-    if (key == 224) {
-      key = m_console.GetKey();  // Read direction code
-      if (key == 72) {           // Up arrow
+    // Обработка стрелок 
+    if (key == 224) { // маркер «это спец-клавиша», потому что стрелки - 2 байта
+      key = m_console.GetKey();  
+      if (key == 72) {           // Стрелка Вверх
         choice--;
-        if (choice < 0) choice = 2;  // Wrap around to bottom
+        if (choice < 0) choice = 2;  
       }
-      if (key == 80) {  // Down arrow
+      if (key == 80) {  // Стрелка Вниз
         choice++;
-        if (choice > 2) choice = 0;  // Wrap around to top
+        if (choice > maxChoice)     // Если ушли ниже последнего 
+            choice = 0;     // Вернуться на первый 
       }
     }
 
-    // Enter key — confirm selection
+    // Enter — подтвердить выбор
     if (key == 13) {
-      break;  // Exit menu loop
+      break;  
     }
   }
 
-  // Create the player based on selected class
+  // Создаём игрока по выбранному классу
   std::string classId = ids[choice];
   Stats stats = m_dataManager.GetClassStats(classId);
   std::string className = m_dataManager.GetClassNamee(classId);
@@ -102,21 +103,22 @@ void Game::RoomChoice() {
               }
           }
 
-          /*m_console.Print(1, 11, m_dataManager.GetString("continueEnter"));*/
           int key = m_console.GetKey();
 
-          if (key == 224) {
+          // Обработка стрелок
+          if (key == 224) { // маркер «это спец-клавиша», потому что стрелки - 2 байта
               key = m_console.GetKey();
-              if (key == 72) {
+              if (key == 72) { // Стрелка Вверх
                   choice--;
                   if (choice < 0) choice = maxChoice;
               }
-              if (key == 80) {
+              if (key == 80) { // Стрелка Вниз
                   choice++;
                   if (choice > maxChoice) choice = 0;
               }
           }
 
+          // Enter — войти в выбранную комнату
           if (key == 13) {
               break;
           }
@@ -127,9 +129,11 @@ void Game::RoomChoice() {
 
 }
 
+// Вход в комнату и обработка её действия
 void Game::EnterRoom(RoomType type) {
   Room* room = nullptr;
 
+  // Создаём комнату нужного типа
   switch (type) {
     case RoomType::REST:
       room = new RestRoom(&m_dataManager, this);
@@ -151,18 +155,18 @@ void Game::EnterRoom(RoomType type) {
   if (room != nullptr) {
     room->SetDescription(m_dataManager.GetRoomDescription(type));
 
+    // Для всех комнат, кроме торговца: показать описание и ждать Enter
     if (type != RoomType::SHOP) {
-      // Обычные комнаты: описание, клавиша, результат
       m_console.ClearScreen();
       HUD(60);
       m_console.Print(1, 1, room->GetDescription());
       m_console.WaitForEnter();
     }
 
-    // Действие комнаты
+    // Действие комнаты (бой, отдых, покупка)
     room->OnEnter(m_player);
 
-    // Второй экран: результат (для всех)
+    // Показываем результат
     m_console.ClearScreen();
     HUD(60);
 
@@ -203,20 +207,24 @@ void Game::HUD(int x) {
   m_console.Print(x, 6, m_dataManager.GetString("separator"));
 
   // Заклинания
+  // Получаем список ID заклинаний класса игрока
   auto spells = m_dataManager.GetClassSpells(m_player->GetClassId());
   m_console.Print(x, 7, m_dataManager.GetString("spells_label"));
 
-  int line = 8;
+  int line = 8; 
   for (size_t i = 0; i < spells.size(); i++) {
-    std::string spellName = m_dataManager.GetSpellName(spells[i]);
-    int mana = m_dataManager.GetSpellMana(spells[i]);
-    m_console.Print(x, line,
-                    "  " + spellName + " - " + std::to_string(mana) + " MP");
-    line++;
+      // По ID получаем русское название
+      std::string spellName = m_dataManager.GetSpellName(spells[i]);
+      // По ID получаем стоимость
+      int mana = m_dataManager.GetSpellMana(spells[i]);
+      m_console.Print(x, line, "  " + spellName + " - " + std::to_string(mana) + " MP");
+      line++;  // Следующая строка
   }
 
-  std::string artifactsTitle = m_dataManager.GetString("artifacts_label");
+  // Артефакты
+  // Получаем инвентарь игрока (вектор ID артефактов)
   auto& inventory = m_player->GetInventory();
+  std::string artifactsTitle = m_dataManager.GetString("artifacts_label");
 
   if (inventory.empty()) {
     m_console.Print(x, 11, artifactsTitle);
@@ -226,9 +234,10 @@ void Game::HUD(int x) {
 
     int line = 12;
     for (size_t i = 0; i < inventory.size(); i++) {
-      std::string name = m_dataManager.GetArtifactName(inventory[i]);
-      m_console.Print(x, line, "  " + name);
-      line++;
+        // По ID получаем русское название
+        std::string name = m_dataManager.GetArtifactName(inventory[i]);
+        m_console.Print(x, line, "  " + name);
+        line++;  // Следующая строка
     }
 
     m_console.Print(x, line, m_dataManager.GetString("separator"));
