@@ -28,15 +28,15 @@ class BattleManager {
   int m_bossSkillCD;
   RoomType m_fightType;
   std::vector<Spell> m_spells;
-  DataManager m_dataManager;
-  ConsoleUtils m_console;
+  DataManager* m_dataManager;
+  ConsoleUtils* m_console;
 
   void PlayerTurn();
   void SpellChoice();
   void EnemyTurn();
 
  public:
-  BattleManager(Player* player, Game* game);
+  BattleManager(Player* player, Game* game, DataManager* dm, ConsoleUtils* co);
   ~BattleManager();
   void StartBattle(RoomType room);
   void CalculateInitiative();

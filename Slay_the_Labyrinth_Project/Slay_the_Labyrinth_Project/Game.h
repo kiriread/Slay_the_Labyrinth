@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "ConsoleUtils.h"
 #include "DataManager.h"
@@ -32,6 +32,7 @@ class Game {
   void EnterRoom(RoomType type); 
 
  public:
+  ConsoleUtils& GetConsole() { return m_console; }
   Game();
   ~Game();
   void Run();
