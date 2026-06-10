@@ -7,8 +7,9 @@
 enum class enemyVariants {NAME = 1, HP = 2, ATK = 3, SPD = 4};
 
 class EnemyCreator {
-private:
-	DataManager m_dataManager;
 public:
-		Enemy* OnEnterB(RoomType type);
+    EnemyCreator(DataManager* dm);  
+    Enemy* OnEnterB(RoomType type);
+private:
+    DataManager* m_dataManager;     
 };

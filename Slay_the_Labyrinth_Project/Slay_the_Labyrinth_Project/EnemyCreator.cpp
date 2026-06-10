@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "Enemy.h"
+EnemyCreator::EnemyCreator(DataManager* dm) : m_dataManager(dm) {}
 
 Enemy* EnemyCreator::OnEnterB(RoomType type) {
   std::srand(std::time(nullptr));
@@ -11,11 +11,13 @@ Enemy* EnemyCreator::OnEnterB(RoomType type) {
   int randIndex;
 
   if (type == RoomType::MONSTER) {
-    enemies = RegularEnemy(m_dataManager);
-  } else if (type == RoomType::ELITE) {
-    enemies = EliteEnemy(m_dataManager);
-  } else {
-    enemies = Bosses(m_dataManager);
+      enemies = RegularEnemy(*m_dataManager);
+  }
+  else if (type == RoomType::ELITE) {
+      enemies = EliteEnemy(*m_dataManager);
+  }
+  else {
+      enemies = Bosses(*m_dataManager);
   }
 
   randIndex = std::rand() % enemies.size();
