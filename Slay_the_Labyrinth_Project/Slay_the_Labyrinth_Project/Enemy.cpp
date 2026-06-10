@@ -14,14 +14,17 @@ void Enemy::TakeDamage(int amount) {
 }
 
 std::vector<Enemy> RegularEnemy(DataManager& dataManager) {
-  return {Enemy(dataManager.GetString("goblin"), 30, 20, 40), Enemy(dataManager.GetString("skeleton"), 50, 15, 30),
-          Enemy(dataManager.GetString("slime"), 60, 16, 20)};
+  return {Enemy(dataManager.GetString("goblin"), 35, 15, 10),
+          Enemy(dataManager.GetString("skeleton"), 50, 15, 10),
+          Enemy(dataManager.GetString("slime"), 60, 17, 15)};
 }
 
 std::vector<Enemy> EliteEnemy(DataManager& dataManager) {
-  return {Enemy(dataManager.GetString("troll"), 50, 40, 50), Enemy(dataManager.GetString("ogre"), 70, 30, 30)};
+  return {Enemy(dataManager.GetString("troll"), 50, 25, 25),
+          Enemy(dataManager.GetString("ogre"), 70, 20, 25)};
 }
 
 std::vector<Enemy> Bosses(DataManager& dataManager) {
-  return {Enemy(dataManager.GetString("dragon"), 90, 20, 50), Enemy(dataManager.GetString("succub"), 70, 30, 60)};
+  return {Enemy(dataManager.GetString("dragon"), 90, 20, 40),
+          Enemy(dataManager.GetString("succub"), 70, 15, 40)};
 }
