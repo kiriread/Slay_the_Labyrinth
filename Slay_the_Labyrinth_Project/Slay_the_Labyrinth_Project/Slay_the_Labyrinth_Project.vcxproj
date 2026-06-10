@@ -127,9 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Artifact.cpp" />
     <ClCompile Include="BattleManager.cpp" />
-    <ClCompile Include="BattleUnit.cpp" />
     <ClCompile Include="BossRoom.cpp" />
     <ClCompile Include="ConsoleUtils.cpp" />
     <ClCompile Include="DataManager.cpp" />
@@ -137,23 +135,17 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyCreator.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Loot.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapGenerator.cpp" />
-    <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterRoom.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RestRoom.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="ShopRoom.cpp" />
     <ClCompile Include="Spell.cpp" />
-    <ClCompile Include="Stats.cpp" />
-    <ClCompile Include="WorldState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Artifact.h" />
     <ClInclude Include="BattleManager.h" />
-    <ClInclude Include="BattleUnit.h" />
     <ClInclude Include="BossRoom.h" />
     <ClInclude Include="ConsoleUtils.h" />
     <ClInclude Include="DataManager.h" />
@@ -161,9 +153,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyCreator.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Loot.h" />
     <ClInclude Include="MapGenerator.h" />
-    <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterRoom.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RestRoom.h" />
@@ -171,7 +161,6 @@
     <ClInclude Include="ShopRoom.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="Stats.h" />
-    <ClInclude Include="WorldState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

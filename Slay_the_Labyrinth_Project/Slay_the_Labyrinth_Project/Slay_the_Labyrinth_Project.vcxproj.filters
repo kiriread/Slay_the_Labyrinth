@@ -21,13 +21,7 @@
     <ClCompile Include="Game.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="WorldState.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="MapGenerator.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="EliteRoom.cpp">
@@ -42,22 +36,10 @@
     <ClCompile Include="ShopRoom.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Loot.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Stats.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Artifact.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="BattleManager.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="BattleUnit.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
@@ -86,16 +68,10 @@
     <ClInclude Include="Game.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="WorldState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="MapGenerator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Room.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="EliteRoom.h">
@@ -110,25 +86,16 @@
     <ClInclude Include="ShopRoom.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Loot.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Stats.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Artifact.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="BattleManager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="BattleUnit.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleUtils.h">
