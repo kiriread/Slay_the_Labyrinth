@@ -26,8 +26,6 @@ class Game {
   MapGenerator m_mapGenerator;
 
   void MainMenu();
-  /*void YourChoice();*/
-  /*void ProcessInput(int key);*/
   void RoomChoice();
   void EnterRoom(RoomType type); 
 

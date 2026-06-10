@@ -35,13 +35,13 @@ class DataManager {
 
   // Артефакты
   void LoadArtifacts(const std::string& filepath);
-  std::string GetArtifactName(const std::string& id) const;
+  std::string GetArtifactName(const std::string& id);
   std::string GetArtifactDescription(const std::string& id) const;
   int GetArtifactPrice(const std::string& id) const;
 
   // Заклинания
   void LoadSpells(const std::string& filepath);
-  std::string GetSpellName(const std::string& id) const;
+  std::string GetSpellName(const std::string& id);
   int GetSpellMana(const std::string& id) const;
 
   // Анти повтор артефактов
