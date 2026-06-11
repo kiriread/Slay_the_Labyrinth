@@ -6,6 +6,6 @@
   "speed_potion":        { "name": "Зелье скорости",        "mana": 30 },
   "dust_in_eyes":        { "name": "Пыль в глаза",          "mana": 30 },
   "fireball":            { "name": "Огненный шар",          "mana": 30 },
-  "frost_vortex":        { "name": "Морозный вихрь",        "mana": 30 },
+  "frost_vortex":        { "name": "Морозящий вихрь",        "mana": 30 },
   "healing":             { "name": "Исцеление",             "mana": 20 }
 }

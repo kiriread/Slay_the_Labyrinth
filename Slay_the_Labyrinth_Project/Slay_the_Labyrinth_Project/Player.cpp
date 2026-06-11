@@ -126,3 +126,13 @@ void Player::ChangeBonusSPDSP(int amount, bool isActivate) {
     else
         m_stats.BonusSPD -= GetSPD() / 2;
 }
+
+void Player::SaveStats() {
+    m_savedBonusATK = m_stats.BonusATK;
+    m_savedBonusSPD = m_stats.BonusSPD;
+}
+
+void Player::RestoreStats() {
+    m_stats.BonusATK = m_savedBonusATK;
+    m_stats.BonusSPD = m_savedBonusSPD;
+}

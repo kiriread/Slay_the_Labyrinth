@@ -5,13 +5,19 @@ Enemy::Enemy(std::string name, int hp, int atk, int spd) : m_name(name) {
   m_stats.CurrentHP = hp;
   m_stats.ATK = atk;
   m_stats.SPD = spd;
-  m_dataManager.LoadStrings("assets/json/strings.json");
 }
 
 void Enemy::TakeDamage(int amount) {
   m_stats.CurrentHP -= amount;
   if (m_stats.CurrentHP < 0) m_stats.CurrentHP = 0;
 }
+
+void Enemy::SetSPD(int spd) {
+  m_stats.SPD = spd;
+  if (m_stats.SPD < 0) m_stats.SPD = 0;
+}
+
+void Enemy::RestoreSPD() { m_stats.SPD = m_originalSPD; }
 
 std::vector<Enemy> RegularEnemy(DataManager& dataManager) {
   return {Enemy(dataManager.GetString("goblin"), 35, 15, 10),

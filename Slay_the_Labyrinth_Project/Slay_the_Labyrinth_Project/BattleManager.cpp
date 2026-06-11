@@ -29,13 +29,15 @@ BattleManager::BattleManager(Player* player, Game* game, DataManager* dm,
 BattleManager::~BattleManager() { delete m_enemy; }
 
 void BattleManager::StartBattle(RoomType room) {
+  m_player->SaveStats();
   EnemyCreator enemyCreator(m_dataManager);
   m_enemy = enemyCreator.OnEnterB(room);
   m_fightType = room;
   if (room != RoomType::MONSTER && m_player->HasArtifact("trial_amulet")) {
-      m_player->ChangeBonusATKSP(0, 0, 1, 0);
+    m_player->ChangeBonusATKSP(0, 0, 1, 0);
   }
-  m_spells = m_sp.GetSpells(m_player->GetClassName());
+  m_spells = m_sp.GetSpells(m_player->GetClassName(), *m_dataManager);
+
   m_totalEnemyATK = m_enemy->GetATK();
   m_totalEnemySPD = m_enemy->GetSPD();
 
@@ -54,21 +56,17 @@ void BattleManager::StartBattle(RoomType room) {
 
     if (m_enemy->GetCurrentHP() <= 0) {
       if (room == RoomType::MONSTER) {
-          if (m_rage_dur != 0)
-              m_player->ChangeBonusATKSP(0, 0, 0, 0);
-          if (m_spdPotion_dur != 0)
-              m_player->ChangeBonusSPDSP(0, 0);
+        if (m_rage_dur != 0) m_player->ChangeBonusATKSP(0, 0, 0, 0);
+        if (m_spdPotion_dur != 0) m_player->ChangeBonusSPDSP(0, 0);
         if (m_player->GetCurrentHP() == m_player->GetMaxHP()) {
           m_player->AddPerfectionStats();
         }
         m_player->AddGold(300);
       } else if (room == RoomType::ELITE) {
-          if (m_rage_dur != 0)
-              m_player->ChangeBonusATKSP(0, 0, 0, 0);
-          if (m_spdPotion_dur != 0)
-              m_player->ChangeBonusSPDSP(0, 0);
-          if (m_player->HasArtifact("trial_amulet"))
-              m_player->ChangeBonusATKSP(0, 0, 0, 1);
+        if (m_rage_dur != 0) m_player->ChangeBonusATKSP(0, 0, 0, 0);
+        if (m_spdPotion_dur != 0) m_player->ChangeBonusSPDSP(0, 0);
+        if (m_player->HasArtifact("trial_amulet"))
+          m_player->ChangeBonusATKSP(0, 0, 0, 1);
         if (m_player->GetCurrentHP() == m_player->GetMaxHP()) {
           m_player->AddPerfectionStats();
         }
@@ -79,7 +77,7 @@ void BattleManager::StartBattle(RoomType room) {
         int key = m_console->GetKey();
         std::exit(0);
       }
-
+      m_player->RestoreStats();
       break;
     }
     if (m_player->GetCurrentHP() <= 0) {
@@ -125,14 +123,14 @@ void BattleManager::PlayerTurn() {
   if (m_spdPotion_dur != 0) {
     m_spdPotion_dur -= 1;
     if (m_spdPotion_dur == 0) {
-        m_player->ChangeBonusSPDSP(0, 0);
+      m_player->ChangeBonusSPDSP(0, 0);
     }
   }
   if (m_player->HasArtifact("healing_sprout")) {
     m_player->RestoreHP(5);
   }
   if (m_player->HasArtifact("diadem")) {
-      m_player->RestoreMP(5);
+    m_player->RestoreMP(5);
   }
   m_console->ClearScreen();
   m_game->HUD(0);
@@ -180,19 +178,21 @@ void BattleManager::EnemyTurn() {
       m_totalEnemyATK *= 2;
     }
   }
-  if (m_frost_dur != 0) {
-    m_frost_dur -= 1;
+  if (m_frost_dur > 0) {
+    m_frost_dur--;
     if (m_frost_dur == 0) {
-      m_totalEnemySPD *= 2;
+      m_enemy->RestoreSPD();
+      m_totalEnemySPD = m_enemy->GetSPD();
     }
   }
+
   if (m_enemy->GetName().size() == 14 && m_fightType == RoomType::BOSS) {
     if (m_bossSkillCD == 0) {
-        if (!m_isFCry) {
-            m_totalEnemyATK /= 1.5;
-            m_totalEnemySPD /= 1.5;
+      if (!m_isFCry) {
+        m_totalEnemyATK /= 1.5;
+        m_totalEnemySPD /= 1.5;
       }
-        m_isFCry = false;
+      m_isFCry = false;
       m_console->ClearScreen();
       m_game->HUD(0);
       EnemyHUD();
@@ -298,10 +298,10 @@ void BattleManager::EnemyHUD() {
 }
 
 void BattleManager::SpellChoice() {
-    m_console->ClearScreen();
-    m_game->HUD(0);
-    m_console->Print(40, 2, m_dataManager->GetString("your_turn"));
-    EnemyHUD();
+  m_console->ClearScreen();
+  m_game->HUD(0);
+  m_console->Print(40, 2, m_dataManager->GetString("your_turn"));
+  EnemyHUD();
   int choice_spell = 0;
   std::string name1 = m_spells[0].GetName();
   std::string name2 = m_spells[1].GetName();
@@ -354,8 +354,8 @@ void BattleManager::SpellChoice() {
         m_enemy->TakeDamage(m_sp.Fireball(m_player->GetINT()));
       }
     } else {
-        m_console->Print(40, 12, m_dataManager->GetString("l_mana"));
-        int key = m_console->GetKey();
+      m_console->Print(42, 12, m_dataManager->GetString("l_mana"));
+      int key = m_console->GetKey();
       SpellChoice();
     }
   } else if (choice_spell == 1) {
@@ -368,11 +368,13 @@ void BattleManager::SpellChoice() {
         m_player->ChangeBonusSPDSP(m_sp.Speed_potion(m_player), 1);
       } else {
         m_frost_dur = m_spells[1].GetMaxDur();
-        m_totalEnemySPD = m_sp.Frost_vortex(m_enemy);
+        int newSPD = m_sp.Frost_vortex(m_enemy);
+        m_enemy->SetSPD(newSPD);
+        m_totalEnemySPD = newSPD;
       }
     } else {
-        m_console->Print(40, 12, m_dataManager->GetString("l_mana"));
-        int key = m_console->GetKey();
+      m_console->Print(42, 12, m_dataManager->GetString("l_mana"));
+      int key = m_console->GetKey();
       SpellChoice();
     }
   } else if (choice_spell == 2) {
@@ -387,8 +389,8 @@ void BattleManager::SpellChoice() {
         m_player->RestoreHP(m_sp.Healing(m_player->GetINT()));
       }
     } else {
-        m_console->Print(40, 12, m_dataManager->GetString("l_mana"));
-        int key = m_console->GetKey();
+      m_console->Print(42, 12, m_dataManager->GetString("l_mana"));
+      int key = m_console->GetKey();
       SpellChoice();
     }
   } else {
