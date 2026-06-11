@@ -12,6 +12,8 @@ class Player {
   Stats m_stats;
   int m_gold = 0;
   std::vector<std::string> m_inventory;
+  int m_savedBonusATK = 0;
+  int m_savedBonusSPD = 0;
 
  public:
   Player(std::string classId, std::string className, Stats stats);
@@ -35,6 +37,8 @@ class Player {
   void DelAmulet();
   void ChangeBonusATKSP(int amount, bool isActivate, bool isElst, bool isElen);
   void ChangeBonusSPDSP(int amount, bool isActivate);
+  void SaveStats();      
+  void RestoreStats();
 
   int GetGold() const;
   void AddGold(int amount);

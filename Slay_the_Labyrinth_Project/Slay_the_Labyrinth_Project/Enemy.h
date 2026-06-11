@@ -1,27 +1,32 @@
 ﻿#pragma once
 #include <string>
 #include <vector>
+
 #include "Stats.h"
 #include "DataManager.h"
 
 class Enemy {
-private:
-    std::string m_name;
-    Stats m_stats;
-    DataManager m_dataManager;
-public:
-    Enemy(std::string name, int hp, int atk, int spd);
+ private:
+  std::string m_name;
+  Stats m_stats;
+  int m_originalSPD;
 
-    // Getters
-    std::string GetName() const { return m_name; }
-    int GetCurrentHP() const { return m_stats.CurrentHP; }
-    int GetMaxHP() const { return m_stats.MaxHP; }
-    int GetATK() const { return m_stats.ATK; }
-    int GetSPD() const { return m_stats.SPD; }
+ public:
+  Enemy(std::string name, int hp, int atk, int spd);
 
-    // Combat
-    void TakeDamage(int amount);
-    bool IsDead() const { return m_stats.CurrentHP <= 0; }
+  // Getters
+  std::string GetName() const { return m_name; }
+  int GetCurrentHP() const { return m_stats.CurrentHP; }
+  int GetMaxHP() const { return m_stats.MaxHP; }
+  int GetATK() const { return m_stats.ATK; }
+  int GetSPD() const { return m_stats.SPD; }
+
+  // Combat
+  void TakeDamage(int amount);
+  bool IsDead() const { return m_stats.CurrentHP <= 0; }
+
+  void SetSPD(int spd);
+  void RestoreSPD();
 };
 
 // Factory functions
