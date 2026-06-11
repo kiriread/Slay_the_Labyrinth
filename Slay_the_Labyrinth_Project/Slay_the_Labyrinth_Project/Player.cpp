@@ -6,11 +6,13 @@ Player::Player(std::string classId, std::string className, Stats stats)
   stats.CurrentMP = stats.MaxMP;
 }
 
+// Восстановить здоровье (не выше максимума)
 void Player::RestoreHP(int amount) {
   m_stats.CurrentHP += amount;
   if (m_stats.CurrentHP > GetMaxHP()) m_stats.CurrentHP = GetMaxHP();
 }
 
+// Восстановить ману (не выше максимума)
 void Player::RestoreMP(int amount) {
   m_stats.CurrentMP += amount;
   if (m_stats.CurrentMP > GetMaxMP()) m_stats.CurrentMP = GetMaxMP();
@@ -70,7 +72,7 @@ void Player::AddArtifact(const std::string& id) {
 
   // Пассивные (не статы) — healing_sprout, diadem, sleep_pillow, sleep_blanket,
   // clover_petal, discount_coupon, trial_amulet, perfection_armor,
-  // revival_amulet Эти эффекты проверяются в других местах
+  // revival_amulet - Эти эффекты проверяются в RestRoom, BattleManager, ShopRoom
 }
 
 int Player::GetGoldMultiplier() const {
@@ -87,26 +89,31 @@ bool Player::HasArtifact(const std::string& id) const {
   return false;
 }
 
+// Увеличить максимальное HP (и текущее тоже) — для снотворного в RestRoom
 void Player::AddMaxHP(int amount) {
     m_stats.BonusMaxHP += amount;
     m_stats.CurrentHP += amount;
 }
 
+// Увеличить максимальную MP (и текущую тоже) — для увлажнителя в RestRoom
 void Player::AddMaxMP(int amount) {
     m_stats.BonusMaxMP += amount;
     m_stats.CurrentMP += amount;
 }
 
+// Доспех безупречности: +3 ко всем статам при победе с полным HP
 void Player::AddPerfectionStats() {
     m_stats.BonusATK += 3;
     m_stats.BonusINT += 3;
     m_stats.BonusSPD += 3;
 }
 
+// Удалить амулет возрождения после использования
 void Player::DelAmulet() {
     m_inventory.erase(std::remove(m_inventory.begin(), m_inventory.end(), "revival_amulet"), m_inventory.end());
 }
 
+// Изменить бонус ATK (Ярость, Амулет испытаний, сброс)
 void Player::ChangeBonusATKSP(int amount, bool isActivate, bool isElst, bool isElen) {
     if (isActivate && !isElst && !isElen)
         m_stats.BonusATK = amount;
@@ -120,6 +127,7 @@ void Player::ChangeBonusATKSP(int amount, bool isActivate, bool isElst, bool isE
 
 }
 
+// Изменить бонус SPD (Зелье скорости, сброс)
 void Player::ChangeBonusSPDSP(int amount, bool isActivate) {
     if (isActivate)
         m_stats.BonusSPD = amount;
@@ -127,11 +135,13 @@ void Player::ChangeBonusSPDSP(int amount, bool isActivate) {
         m_stats.BonusSPD -= GetSPD() / 2;
 }
 
+// Сохранить бонусы ATK и SPD перед боем
 void Player::SaveStats() {
     m_savedBonusATK = m_stats.BonusATK;
     m_savedBonusSPD = m_stats.BonusSPD;
 }
 
+// Восстановить бонусы ATK и SPD после боя
 void Player::RestoreStats() {
     m_stats.BonusATK = m_savedBonusATK;
     m_stats.BonusSPD = m_savedBonusSPD;

@@ -44,17 +44,47 @@ Stats DataManager::GetClassStats(const std::string& classId) {
 
 // Конвертация UTF-8 → Windows-1251 (для вывода в консоль)
 std::string DataManager::UTF8to1251(const std::string& utf8) const {
-  int size = MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, nullptr, 0);
-  std::wstring wtext(size, L'\0');
-  MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, &wtext[0], size);
+    // Шаг 1: узнаём, сколько wide-символов понадобится
+      // CP_UTF8 — исходная кодировка (UTF-8)
+      // utf8.c_str() — исходная строка
+      // -1 — строка заканчивается нулём
+      // nullptr, 0 — не заполняем буфер, только узнаём размер
+    int size = MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, nullptr, 0);
 
-  int size1251 =
-      WideCharToMultiByte(1251, 0, &wtext[0], -1, nullptr, 0, nullptr, nullptr);
-  std::string result(size1251, '\0');
-  WideCharToMultiByte(1251, 0, &wtext[0], -1, &result[0], size1251, nullptr,
-                      nullptr);
+    // Шаг 2: создаём wide-строку нужного размера
+    std::wstring wtext(size, L'\0');
 
-  return result;
+    // Шаг 3: конвертируем UTF-8 → Wide-строку (Unicode)
+    // &wtext[0] — буфер для результата
+    MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, &wtext[0], size);
+
+    // Шаг 4: узнаём, сколько байт понадобится в Windows-1251
+    // 1251 — целевая кодовая страница
+    int size1251 = WideCharToMultiByte(
+        1251,            // целевая кодировка
+        0,               // флаги (не используются)
+        &wtext[0],       // исходная wide-строка
+        -1,              // строка заканчивается нулём
+        nullptr,         // не заполняем буфер
+        0,               // размер буфера (0 = узнать размер)
+        nullptr, nullptr // замена для недопустимых символов (не используется)
+    );
+
+    // Шаг 5: создаём обычную строку нужного размера
+    std::string result(size1251, '\0');
+
+    // Шаг 6: конвертируем Wide-строку → Windows-1251
+    WideCharToMultiByte(
+        1251,            // целевая кодировка
+        0,               // флаги
+        &wtext[0],       // исходная wide-строка
+        -1,              // до нуля
+        &result[0],      // буфер для результата
+        size1251,        // размер буфера
+        nullptr, nullptr // замена (не используется)
+    );
+
+    return result;  // Возвращаем строку в Windows-1251
 }
 
 // Русское название класса по ID
@@ -217,7 +247,7 @@ std::vector<std::string> DataManager::GetRandomArtifactIdsExcluding(
     }
   }
 
-  // Если доступных меньше чем запрошено — вернуть сколько есть
+  // Если ничего доступного нет — возвращаем пустой вектор
   if (ids.empty()) return {};
 
   // Перемешать случайно
@@ -225,6 +255,15 @@ std::vector<std::string> DataManager::GetRandomArtifactIdsExcluding(
   std::mt19937 g(rd());
   std::shuffle(ids.begin(), ids.end(), g);
 
-  int resultSize = (count < (int)ids.size()) ? count : (int)ids.size();
+  // Сколько вернуть: запрошенное количество или сколько есть (меньшее из двух)
+  int resultSize;
+  if (count < (int)ids.size()) {
+      resultSize = count;                 // Вернуть сколько просили
+  }
+  else {
+      resultSize = (int)ids.size();       // Вернуть всё что есть
+  }
+
+  // Возвращаем первые resultSize элементов из перемешанного списка
   return std::vector<std::string>(ids.begin(), ids.begin() + resultSize);
 }

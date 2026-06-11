@@ -9,6 +9,7 @@ void ConsoleUtils::ClearScreen() {
 
 void ConsoleUtils::Print(int x, int y, const std::string& text) {
     COORD coord = { (SHORT)x, (SHORT)y };
+    // ѕеремещает курсор консоли в заданную позицию(x, y)
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
     std::cout << text;
 }

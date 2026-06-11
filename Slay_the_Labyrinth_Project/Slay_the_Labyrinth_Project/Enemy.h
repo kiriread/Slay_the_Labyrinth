@@ -14,14 +14,14 @@ class Enemy {
  public:
   Enemy(std::string name, int hp, int atk, int spd);
 
-  // Getters
+  // Геттеры
   std::string GetName() const { return m_name; }
   int GetCurrentHP() const { return m_stats.CurrentHP; }
   int GetMaxHP() const { return m_stats.MaxHP; }
   int GetATK() const { return m_stats.ATK; }
   int GetSPD() const { return m_stats.SPD; }
 
-  // Combat
+  // Боевка
   void TakeDamage(int amount);
   bool IsDead() const { return m_stats.CurrentHP <= 0; }
 
@@ -29,7 +29,7 @@ class Enemy {
   void RestoreSPD();
 };
 
-// Factory functions
+// Вектора врагов
 std::vector<Enemy> RegularEnemy(DataManager& dataManager);
 std::vector<Enemy> EliteEnemy(DataManager& dataManager);
 std::vector<Enemy> Bosses(DataManager& dataManager);

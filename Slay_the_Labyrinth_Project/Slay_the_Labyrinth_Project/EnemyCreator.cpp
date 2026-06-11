@@ -11,15 +11,13 @@ Enemy* EnemyCreator::OnEnterB(RoomType type) {
   int randIndex;
 
   if (type == RoomType::MONSTER) {
-      enemies = RegularEnemy(*m_dataManager);
-  }
-  else if (type == RoomType::ELITE) {
-      enemies = EliteEnemy(*m_dataManager);
-  }
-  else {
-      enemies = Bosses(*m_dataManager);
+    enemies = RegularEnemy(*m_dataManager);
+  } else if (type == RoomType::ELITE) {
+    enemies = EliteEnemy(*m_dataManager);
+  } else {
+    enemies = Bosses(*m_dataManager);
   }
 
   randIndex = std::rand() % enemies.size();
-  return new Enemy(enemies[randIndex]);  // Return pointer to new enemy
+  return new Enemy(enemies[randIndex]);  // Возврат указателя на нового врага
 }

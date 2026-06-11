@@ -3,7 +3,7 @@
 #include "Game.h"
 
 int main() {
-  // Russian language
+  // Русский язык
   SetConsoleCP(1251);
   SetConsoleOutputCP(1251);
 

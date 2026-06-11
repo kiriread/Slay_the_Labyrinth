@@ -36,13 +36,14 @@ void ShopRoom::OnEnter(Player* player) {
     int maxChoice = (int)m_stock.size() - 1;
     if (choice > maxChoice) choice = maxChoice;
 
+    // Очистка и перерисовка (HUD + товары)
     m_console->ClearScreen();
     m_game->HUD(60);
 
     m_console->Print(1, 1, m_description);
     m_console->Print(1, 3, m_dataManager->GetString("shop_title"));
 
-    // Товары
+    // Вывод списка товаров
     for (int i = 0; i < (int)m_stock.size(); i++) {
       std::string name = m_dataManager->GetArtifactName(m_stock[i]);
       std::string desc = m_dataManager->GetArtifactDescription(m_stock[i]);
@@ -52,6 +53,7 @@ void ShopRoom::OnEnter(Player* player) {
         price = price / 2;
       }
 
+      // Подсветка выбранного товара стрелкой
       std::string line;
       if (i == choice)
         line = "> ";
@@ -60,31 +62,35 @@ void ShopRoom::OnEnter(Player* player) {
       line += name + " - " + std::to_string(price) +
               m_dataManager->GetString("shop_gold_suffix");
 
-      m_console->Print(1, 5 + i * 3, line);
-      m_console->Print(3, 6 + i * 3, desc);
+      m_console->Print(1, 5 + i * 3, line);  // Название и цена
+      m_console->Print(3, 6 + i * 3, desc);  // Описание со сдвигом
     }
 
+    // Показываем результат предыдущей покупки
     if (!message.empty()) {
       m_console->Print(1, 14, message);
     }
 
     int key = m_console->GetKey();
 
+    // Навигация стрелками
     if (key == 224) {
       key = m_console->GetKey();
-      if (key == 72) {
+      if (key == 72) {  // Вверх
         choice--;
-        if (choice < 0) choice = maxChoice;
+        if (choice < 0) choice = maxChoice;  // Зацикливание на последний
       }
-      if (key == 80) {
+      if (key == 80) {  // Вниз
         choice++;
-        if (choice > maxChoice) choice = 0;
+        if (choice > maxChoice) choice = 0;  // Зацикливание на первый
       }
     }
 
+    // Enter — покупк
     if (key == 13) {
       int price = m_dataManager->GetArtifactPrice(m_stock[choice]);
 
+      // Проверяем скидку ещё раз (для списания золота)
       if (player->HasArtifact("discount_coupon")) {
         price = price / 2;
       }
@@ -99,6 +105,7 @@ void ShopRoom::OnEnter(Player* player) {
       }
     }
 
+    // ESC — выход от торговца
     if (key == 27) {
       m_resultText = m_dataManager->GetString("shop_leave");
       break;
