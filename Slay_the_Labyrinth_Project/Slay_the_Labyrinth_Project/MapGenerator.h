@@ -5,5 +5,5 @@
 
 class MapGenerator {
 public:
-	std::vector<RoomType> GenerateRoomOptions(int depth);
+	std::vector<RoomType> GenerateRoomOptions(int count);
 };

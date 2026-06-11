@@ -6,7 +6,7 @@ struct Stats {
     int MaxMP = 50;
     int CurrentMP = 50;
 
-    // Stubs
+    // Значения по умолчанию
     int ATK = 10;
     int SPD = 10;
     int INT = 10;
@@ -17,7 +17,6 @@ struct Stats {
     int BonusMaxHP = 0;
     int BonusMaxMP = 0;
 
-    // Getters
     int GetTotalATK() const { return ATK + BonusATK; }
     int GetTotalSPD() const { return SPD + BonusSPD; }
     int GetTotalINT() const { return INT + BonusINT; }

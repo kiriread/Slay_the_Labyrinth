@@ -114,4 +114,21 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\json\artifacts.json">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="assets\json\classes.json">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="assets\json\rooms.json">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="assets\json\spells.json">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="assets\json\strings.json">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+  </ItemGroup>
 </Project>

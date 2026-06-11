@@ -162,6 +162,13 @@
     <ClInclude Include="Spell.h" />
     <ClInclude Include="Stats.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\json\artifacts.json" />
+    <None Include="assets\json\classes.json" />
+    <None Include="assets\json\rooms.json" />
+    <None Include="assets\json\spells.json" />
+    <None Include="assets\json\strings.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

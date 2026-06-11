@@ -18,7 +18,6 @@ class Player {
  public:
   Player(std::string classId, std::string className, Stats stats);
 
-  // more Getters
   std::string GetClassName() const { return m_className; }
   int GetCurrentHP() const { return m_stats.CurrentHP; }
   int GetMaxHP() const { return m_stats.GetTotalMaxHP(); }

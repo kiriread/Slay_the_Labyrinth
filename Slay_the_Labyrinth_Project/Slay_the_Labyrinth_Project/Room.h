@@ -16,7 +16,6 @@ class Room {
   Room(RoomType type);
   virtual ~Room();
 
-  RoomType GetType() const;
   std::string GetDescription() const;
 
   virtual void OnEnter(Player* player) = 0;
